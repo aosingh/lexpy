@@ -7,7 +7,7 @@ for faster searches(of words, prefixes and wildcard patterns). Precisely the sea
 *Fun Facts* :
 1. The 45-letter word pneumonoultramicroscopicsilicovolcanoconiosis is the longest English word that appears in a major dictionary.
 So for all english words, the search time is bounded by O(45). 
-2. The longest technical word(not in dictionary) is the name of a protein called as titin. It has 189,819
+2. The longest technical word(not in dictionary) is the name of a protein called as [titin](https://en.wikipedia.org/wiki/Titin). It has 189,819
 letters and it is disputed whether it is a word.
 
 2 important Lexicon datastructures are:
