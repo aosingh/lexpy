@@ -8,8 +8,7 @@ for faster searches(of words, prefixes and wildcard patterns). Precisely the sea
 1. Trie.
 3. Directed Acyclic Word Graph(DAWG).
 
-
-
+Both Trie and DAWG are Finite State Automaton(FSA)
 
 *Fun Facts* :
 1. The 45-letter word pneumonoultramicroscopicsilicovolcanoconiosis is the longest English word that appears in a major dictionary.
