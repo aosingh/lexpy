@@ -5,3 +5,4 @@ samplewords2.txt
 .coverage
 sampledawg.py
 .idea
+*.pyc
