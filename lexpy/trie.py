@@ -6,17 +6,17 @@ import os
 import types
 
 
-def build_from_file(infile=None):
+def build_trie_from_file(infile=None):
     """
         Description:
             This method can be used to create a Trie from an input file of words.
             Each word is expected to be on a new line.
 
         Args:
-            :arg infile (str or File): Either absolute file path or a File object
+            :arg infile (str or File-like object): Either absolute file path or a File object
 
         Returns:
-            :returns trie (`lexypy.trie.Trie`) : An instance of Trie class created after inserting all the words.
+            :returns trie (`lexpy.trie.Trie`) : An instance of Trie class created after inserting all the words.
 
         Raises:
             :raises `ValueError` : If the input file is `None`
@@ -54,7 +54,7 @@ class _Node:
         self.children = {}
         self.eow = False
 
-    def add_child(self, letter, id=None):
+    def add_child(self, letter, _id=None):
         """
         Description:
             To add a child edge to the current Node.
@@ -64,7 +64,7 @@ class _Node:
             :arg id (int) Unique numerical ID assigned to this node.
 
         """
-        self.children[letter] = _Node(id, letter)
+        self.children[letter] = _Node(_id, letter)
 
     def __getitem__(self, letter):
         """
@@ -347,7 +347,7 @@ class Trie:
             letter = word[i]
             if letter not in node.children:
                 self.__id += 1
-                node.add_child(letter, id=self.__id)
+                node.add_child(letter, _id=self.__id)
             node = node[letter]
             if i == len(word)-1:
                 node.eow = True

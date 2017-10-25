@@ -8,7 +8,7 @@ import os
 def build_dawg_from_file(infile=None):
     """
         Description:
-            This method can be used to create a Trie from an input file of words.
+            This method can be used to create a DAWG from an input file of words.
             Each word is expected to be on a new line.
 
         Args:
@@ -42,7 +42,7 @@ class _Node:
         self.children = {}
         self.eow = False
 
-    def add_child(self, letter, id=None):
+    def add_child(self, letter, _id=None):
         """
         Description:
             To add a child edge to the current Node.
@@ -52,7 +52,7 @@ class _Node:
             :arg id (int) Unique numerical ID assigned to this node.
 
         """
-        self.children[letter] = _Node(id, letter)
+        self.children[letter] = _Node(_id, letter)
 
     def __getitem__(self, letter):
         """
@@ -84,9 +84,11 @@ class _Node:
     def __eq__(self, other):
         return self.__str__() == other.__str__()
 
-
     def __hash__(self):
         return self.__str__().__hash__()
+
+    def __repr__(self):
+        return str(self.id) + self.val + str(self.eow)
 
 
 class DAWG:
@@ -94,46 +96,46 @@ class DAWG:
     def __init__(self):
         self.__id = 1
         self.__num_of_words = 1
-        self.prev_word = ''
+        self.__prev_word = ''
         self.root = _Node(self.__id, '')
-        self.minimized_nodes = {}
-        self.unchecked_nodes = []
+        self.__minimized_nodes = {}
+        self.__unchecked_nodes = []
 
     def add(self, word):
-        if word < self.prev_word:
+        if word < self.__prev_word:
             raise ValueError("Insert in alphabetical order.")
             # find common prefix between word and previous word
         common_prefix_index = 0
-        for i in range(min(len(word), len(self.prev_word))):
-            if word[i] != self.prev_word[i]: break
+        for i in range(min(len(word), len(self.__prev_word))):
+            if word[i] != self.__prev_word[i]: break
             common_prefix_index += 1
         self._reduce(common_prefix_index)
-        if len(self.unchecked_nodes) == 0:
+        if len(self.__unchecked_nodes) == 0:
             node = self.root
         else:
-            node = self.unchecked_nodes[-1][2]
+            node = self.__unchecked_nodes[-1][2]
 
         for letter in word[common_prefix_index:]:
-            id = self.__id + 1
-            node.add_child(letter, id)
-            self.unchecked_nodes.append((node, letter, node[letter]))
+            _id = self.__id + 1
+            node.add_child(letter, _id)
+            self.__unchecked_nodes.append((node, letter, node[letter]))
             node = node[letter]
 
         node.eow = True
         self.__num_of_words += 1
-        self.prev_word = word
+        self.__prev_word = word
 
     def reduce(self):
         self._reduce(0)
 
     def _reduce(self, to):
-        for i in range(len(self.unchecked_nodes)-1, to-1, -1):
-            (parent, letter, child) = self.unchecked_nodes[i]
-            if child in self.minimized_nodes:
+        for i in range(len(self.__unchecked_nodes)-1, to-1, -1):
+            (parent, letter, child) = self.__unchecked_nodes[i]
+            if child in self.__minimized_nodes:
                 parent.children[letter] = child
             else:
-                self.minimized_nodes[child] = child
-            self.unchecked_nodes.pop()
+                self.__minimized_nodes[child] = child
+            self.__unchecked_nodes.pop()
 
     def __len__(self):
         """
@@ -144,7 +146,7 @@ class DAWG:
             :returns (int) Number of Nodes in the dawg data structure
         :return:
         """
-        return len(self.minimized_nodes)
+        return 1+len(self.__minimized_nodes) # 1(for the root node) + Minimized list of nodes
 
     def __contains__(self, word):
         """
@@ -345,6 +347,9 @@ class DAWG:
         """
         if type(source) not in [list, set, tuple, types.GeneratorType, str, file]:
             raise ValueError("Source type {0} not supported ".format(type(source)))
+
+        if type(source) in [list, set, tuple]:
+            source = sorted(source)
 
         if type(source) in [str, file]:
             if type(source) == str and not os.path.exists(source):

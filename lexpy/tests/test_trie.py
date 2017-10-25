@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from lexpy.trie import Trie, build_from_file
+from lexpy.trie import Trie, build_trie_from_file
 from lexpy.exceptions import InvalidWildCardExpressionError
 
 
@@ -191,7 +191,7 @@ class TestWildCardSearch(unittest.TestCase):
 class TestBuildFromFile(unittest.TestCase):
 
     def test_trie_build_from_file_path(self):
-        self.trie = build_from_file(small_dataset)
+        self.trie = build_trie_from_file(small_dataset)
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('ash' in self.trie, "Word should be in trie")
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
@@ -200,7 +200,7 @@ class TestBuildFromFile(unittest.TestCase):
 
     def test_trie_build_from_file_object(self):
         with open(small_dataset, 'r') as input_file:
-            self.trie = build_from_file(input_file)
+            self.trie = build_trie_from_file(input_file)
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('ash' in self.trie, "Word should be in trie")
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
