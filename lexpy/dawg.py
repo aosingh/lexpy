@@ -1,4 +1,5 @@
-from lexpy._base import FSANode, FSA
+from lexpy._base.node import FSANode
+from lexpy._base.automata import FSA
 
 
 def build_dawg_from_file(infile=None):
