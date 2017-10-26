@@ -1,6 +1,6 @@
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
-[![Travis](https://img.shields.io/travis/aosingh/lexpy.svg)]()
+[![Travis](https://travis-ci.org/aosingh/lexpy.svg?branch=master)]()
 [![Coverage Status](https://coveralls.io/repos/github/aosingh/lexpy/badge.svg?branch=master)](https://coveralls.io/github/aosingh/lexpy?branch=master)
 
 >A lexicon is a data-structure which stores a set of words. The difference between 

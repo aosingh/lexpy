@@ -6,7 +6,6 @@ import os
 import types
 
 
-
 def build_trie_from_file(infile=None):
     """
         Description:
