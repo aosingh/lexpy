@@ -5,6 +5,12 @@ import types
 from lexpy.exceptions import InvalidWildCardExpressionError
 from difflib import SequenceMatcher
 
+from io import IOBase
+import sys
+PYTHON_3 = sys.version_info[0] == 3
+if PYTHON_3:
+    file = IOBase
+
 '''
 Define common internal utility functions here
 '''

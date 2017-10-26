@@ -4,6 +4,12 @@ from lexpy.exceptions import InvalidWildCardExpressionError
 import types
 import os
 
+from io import IOBase
+import sys
+PYTHON_3 = sys.version_info[0] == 3
+if PYTHON_3:
+    file = IOBase
+
 
 def build_dawg_from_file(infile=None):
     """

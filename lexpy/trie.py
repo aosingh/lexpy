@@ -4,7 +4,11 @@ from lexpy.exceptions import InvalidWildCardExpressionError
 
 import os
 import types
-
+import sys
+from io import IOBase
+PYTHON_3 = sys.version_info[0] == 3
+if PYTHON_3:
+    file = IOBase
 
 
 def build_trie_from_file(infile=None):
