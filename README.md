@@ -1,10 +1,10 @@
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
+![Linux Build Status](https://travis-ci.org/aosingh/lexpy.svg?branch=master)]
 
 >A lexicon is a data-structure which stores a set of words. The difference between 
 a dictionary and a lexicon is that in a lexicon there are no values associated with the words. A lexicon is similar to a list of words or a set, but the internal representation is different and optimized
 for faster searches(of words, prefixes and wildcard patterns). Precisely the search time is O(W) where W is the length of the word. 
 
-[![Linux Build Status](https://travis-ci.org/aosingh/lexpy.svg?branch=master)][travis]
 
 2 important Lexicon datastructures are:
 1. Trie.
