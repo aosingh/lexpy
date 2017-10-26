@@ -1,6 +1,5 @@
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
-![Linux Build Status](https://travis-ci.org/aosingh/lexpy.svg?branch=master)
 [![Travis](https://img.shields.io/travis/aosingh/lexpy.svg)]()
 [![Test Coverage](https://codeclimate.com/github/aosingh/lexpy/badges/coverage.svg)](https://codeclimate.com/github/aosingh/lexpy/badges/coverage.svg)
 
