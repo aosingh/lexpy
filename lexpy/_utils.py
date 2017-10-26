@@ -39,7 +39,7 @@ def validate_expression(wildcard_expression):
     Example:
         >>> from lexpy._utils import validate_expression
         >>> sample_expr = 'a*?' # Match literal `a` followed by any character Zero or unlimited times.
-        >>> print validate_expression(sample_expr) # Outputs 'a*'
+        >>> print(validate_expression(sample_expr)) # Outputs 'a*'
 
     """
 
@@ -67,7 +67,6 @@ def gen_source(source):
     """
     try:
         if type(source) == file:
-            print type(file)
             input_file = source
         else:
             input_file = open(source, 'r')
