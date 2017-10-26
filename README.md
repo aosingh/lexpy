@@ -1,6 +1,8 @@
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
 ![Linux Build Status](https://travis-ci.org/aosingh/lexpy.svg?branch=master)
+[![Travis](https://img.shields.io/travis/aosingh/lexpy.svg)]()
+[![Test Coverage](https://codeclimate.com/github/aosingh/lexpy/badges/coverage.svg)](https://codeclimate.com/github/aosingh/lexpy/badges/coverage.svg)
 
 >A lexicon is a data-structure which stores a set of words. The difference between 
 a dictionary and a lexicon is that in a lexicon there are no values associated with the words. A lexicon is similar to a list of words or a set, but the internal representation is different and optimized
