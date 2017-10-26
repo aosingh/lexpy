@@ -355,7 +355,6 @@ class DAWG:
             if type(source) == str and not os.path.exists(source):
                 raise IOError("File does not exists")
             source = gen_source(source)
-            source = gen_source(source)
 
         for word in source:
             if type(word) == str:

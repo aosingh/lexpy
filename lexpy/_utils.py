@@ -65,15 +65,13 @@ def gen_source(source):
     :param source:
     :return:
     """
-    try:
-        if type(source) == file:
-            input_file = source
-        else:
-            input_file = open(source, 'r')
-        for line in input_file:
-            yield line.strip()
-    finally:
-        input_file.close()
+    if type(source) == file:
+        input_file = source
+    else:
+        input_file = open(source, 'r')
+    for line in input_file:
+        yield line.strip()
+    input_file.close()
 
 
 def find_longest_common_prefix(str1, str2):
