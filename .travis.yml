@@ -16,4 +16,4 @@ script:
   - coverage run -m unittest discover -s lexpy/tests
   - coverage report
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -r $CC_TEST_REPORTER_ID
