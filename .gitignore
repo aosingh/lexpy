@@ -6,3 +6,6 @@ samplewords2.txt
 sampledawg.py
 .idea
 *.pyc
+dist
+lexpy.egg-info
+build
