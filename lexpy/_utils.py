@@ -67,6 +67,7 @@ def gen_source(source):
     """
     try:
         if type(source) == file:
+            print type(file)
             input_file = source
         else:
             input_file = open(source, 'r')
