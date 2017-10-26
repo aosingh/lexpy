@@ -213,12 +213,13 @@ class FSA:
         if type(source) not in [list, set, tuple, types.GeneratorType, str, file]:
             raise ValueError("Source type {0} not supported ".format(type(source)))
 
+        if type(source) == str and not os.path.exists(source):
+            raise IOError("File does not exists")
+
         if type(source) in [list, set, tuple]:
             source = sorted(source)
 
         if type(source) in [str, file]:
-            if type(source) == str and not os.path.exists(source):
-                raise IOError("File does not exists")
             source = gen_source(source)
 
         for word in source:

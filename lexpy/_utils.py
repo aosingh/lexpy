@@ -1,10 +1,5 @@
 import re
-import os
-import types
-
 from lexpy.exceptions import InvalidWildCardExpressionError
-from difflib import SequenceMatcher
-
 
 '''
 Define common internal utility functions here
@@ -75,19 +70,9 @@ def gen_source(source):
     input_file.close()
 
 
-def find_longest_common_prefix(str1, str2):
-    match = SequenceMatcher(None, str1, str2).find_longest_match(0, len(str1), 0, len(str2))
-    if match.a == 0 \
-            and match.b == 0 \
-            and match.size != 0:
-        return match.a + match.size , str1[:match.a+match.size]
-    return 0, None
-
-
 def extendList(source, addthis):
     if addthis is not None and len(addthis) > 0:
         source.extend(addthis)
     return source
-
 
 

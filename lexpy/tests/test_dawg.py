@@ -1,7 +1,8 @@
 import os
 import unittest
 
-from lexpy.dawg import build_dawg_from_file, DAWG
+from lexpy.dawg import DAWG
+from lexpy.utils import build_dawg_from_file
 from lexpy.exceptions import InvalidWildCardExpressionError
 
 HERE = os.path.dirname(__file__)

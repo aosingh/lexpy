@@ -2,28 +2,6 @@ from lexpy._base.node import FSANode
 from lexpy._base.automata import FSA
 
 
-def build_dawg_from_file(infile=None):
-    """
-        Description:
-            This method can be used to create a DAWG from an input file of words.
-            Each word is expected to be on a new line.
-
-        Args:
-            :arg infile (str or File): Either absolute file path or a File object
-
-        Returns:
-            :returns dawg (`lexypy.dawg.DAWG`) : An instance of DAWG class created after inserting all the words.
-
-        Raises:
-            :raises `ValueError` : If the input file is `None`
-        """
-    if infile is None:
-        raise ValueError("Please provide the file path")
-    dawg = DAWG()
-    dawg.add_all(infile)
-    return dawg
-
-
 class _DAWGNode(FSANode):
 
     def add_child(self, letter, _id=None):

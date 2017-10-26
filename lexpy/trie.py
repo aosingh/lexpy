@@ -2,28 +2,6 @@ from lexpy._base.node import FSANode
 from lexpy._base.automata import FSA
 
 
-def build_trie_from_file(infile=None):
-    """
-        Description:
-            This method can be used to create a Trie from an input file of words.
-            Each word is expected to be on a new line.
-
-        Args:
-            :arg infile (str or File-like object): Either absolute file path or a File object
-
-        Returns:
-            :returns trie (`lexpy.trie.Trie`) : An instance of Trie class created after inserting all the words.
-
-        Raises:
-            :raises `ValueError` : If the input file is `None`
-        """
-    if infile is None:
-        raise ValueError("Please provide the file path")
-    trie = Trie()
-    trie.add_all(infile)
-    return trie
-
-
 class _TrieNode(FSANode):
 
     def add_child(self, letter, _id=None):
