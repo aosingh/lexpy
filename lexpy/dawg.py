@@ -26,9 +26,6 @@ def build_dawg_from_file(infile=None):
 
 class _DAWGNode(FSANode):
 
-    def __init__(self, _id, val):
-        FSANode.__init__(self, _id, val)
-
     def add_child(self, letter, _id=None):
         """
         Description:
@@ -97,22 +94,3 @@ class DAWG(FSA):
         :return:
         """
         return 1+len(self.__minimized_nodes) # 1(for the root node) + Minimized list of nodes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

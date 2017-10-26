@@ -26,9 +26,6 @@ def build_trie_from_file(infile=None):
 
 class _TrieNode(FSANode):
 
-    def __init__(self, _id, val):
-        FSANode.__init__(self, _id, val)
-
     def add_child(self, letter, _id=None):
         """
         Description:

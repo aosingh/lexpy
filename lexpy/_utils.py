@@ -84,6 +84,10 @@ def find_longest_common_prefix(str1, str2):
     return 0, None
 
 
+def extendList(source, addthis):
+    if addthis is not None and len(addthis) > 0:
+        source.extend(addthis)
+    return source
 
 
 

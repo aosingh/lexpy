@@ -1,7 +1,7 @@
 import os
 import types
 
-from lexpy._utils import validate_expression, gen_source
+from lexpy._utils import validate_expression, gen_source, extendList
 from lexpy.exceptions import InvalidWildCardExpressionError
 
 
@@ -84,6 +84,7 @@ class FSA:
         contains, _ = self.__contains_prefix(prefix)
         return contains
 
+
     @staticmethod
     def __words_with_wildcard(node, wildcard, index, currentWord):
         """
@@ -117,27 +118,22 @@ class FSA:
             currentWord = ""
 
         words = []
-
         letter = wildcard[index]
-
         if letter == '?':
             for child in node.children:
                 childnode = node[child]
                 new_word = currentWord + child
                 childwords = FSA.__words_with_wildcard(childnode, wildcard, index + 1, new_word)
-                if childwords is not None and len(childwords) > 0:
-                    words.extend(childwords)
+                words = extendList(words, childwords)
         elif letter == '*':
             words_at_current_level = FSA.__words_with_wildcard(node, wildcard, index + 1, currentWord)
-            if words_at_current_level is not None and len(words_at_current_level) > 0:
-                words.extend(words_at_current_level)
+            words = extendList(words, words_at_current_level)
             if node.children:
                 for child in node.children:
                     childnode = node[child]
                     new_word = currentWord + child
                     childwords = FSA.__words_with_wildcard(childnode, wildcard, index, new_word)
-                    if childwords is not None and len(childwords) > 0:
-                        words.extend(childwords)
+                    words = extendList(words, childwords)
             elif node.eow and index == len(wildcard) - 1:
                 return [currentWord]
         else:
@@ -145,8 +141,7 @@ class FSA:
                 childnode = node[letter]
                 new_word = currentWord + childnode.val
                 childwords = FSA.__words_with_wildcard(childnode, wildcard, index + 1, new_word)
-                if childwords is not None and len(childwords) > 0:
-                    words.extend(childwords)
+                words = extendList(words, childwords)
         return words
 
     def search(self, wildcard):
