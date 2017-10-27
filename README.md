@@ -2,6 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
 [![Travis](https://travis-ci.org/aosingh/lexpy.svg?branch=master)](https://travis-ci.org/aosingh/lexpy)
+[![Build status](https://ci.appveyor.com/api/projects/status/hib5wm4qo2oop3ui?svg=true)](https://ci.appveyor.com/project/aosingh/lexpy)
 [![Coverage Status](https://coveralls.io/repos/github/aosingh/lexpy/badge.svg?branch=master)](https://coveralls.io/github/aosingh/lexpy?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/60626f81c0db0c5d8dcd/maintainability)](https://codeclimate.com/github/aosingh/lexpy/maintainability)
 
