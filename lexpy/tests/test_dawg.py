@@ -123,6 +123,12 @@ class TestDAWGNodeCount(unittest.TestCase):
         self.assertEqual(2, self.dawg.get_word_count(), "Word count not equal")
         self.assertEqual(7, len(self.dawg), "Number of nodes")
 
+    def test_dawg_reduced_node_count(self):
+        self.dawg = DAWG()
+        self.dawg.add_all(["tap", "taps", "top", "tops"])
+        self.dawg.reduce()
+        self.assertEqual(5, len(self.dawg), "Number of nodes")
+
 
 class TestDAWGPrefixExists(unittest.TestCase):
     def test_dawg_node_prefix_exists(self):
@@ -214,6 +220,8 @@ class TestBuildFromFile(unittest.TestCase):
         self.assertTrue('ZYGOMATA' in self.dawg, "Word should be in dawg")
         self.assertTrue('ZYGOMORPHY' in self.dawg, "Word should be in dawg")
         self.assertEqual(178691, self.dawg.get_word_count(), "Word count not equal")
+
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,6 +1,6 @@
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
-[![Travis](https://travis-ci.org/aosingh/lexpy.svg?branch=master)]()
+[![Travis](https://travis-ci.org/aosingh/lexpy.svg?branch=master)](https://travis-ci.org/aosingh/lexpy)
 [![Coverage Status](https://coveralls.io/repos/github/aosingh/lexpy/badge.svg?branch=master)](https://coveralls.io/github/aosingh/lexpy?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/60626f81c0db0c5d8dcd/maintainability)](https://codeclimate.com/github/aosingh/lexpy/maintainability)
 
@@ -75,7 +75,6 @@ dawg.reduce() # Perform DFA minimization. Call this every time a chunk of words 
 
 len(dawg) # Number of nodes in DAWG
 13
-
 
 ```
 

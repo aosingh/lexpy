@@ -33,6 +33,7 @@ class FSANode:
         """
         return self.children[letter]
 
+    '''
     def __iter__(self):
         """
         Description:
@@ -52,6 +53,7 @@ class FSANode:
             current_node = queue.popleft()
             yield current_node
             queue.extend([child for _, child in current_node.children.iteritems()])
+    '''
 
     def __str__(self):
         """
@@ -94,7 +96,7 @@ class FSANode:
     def __repr__(self):
         """
         Description:
-            Returns a nicely formatted string of the FSA node. This is invoked when `print()` is called.
+            Returns a nicely formatted string of the FSA node. This is invoked when `repr()` is called.
         :return:
         """
         return "{0}(id={1}, label={2}, EOW={3})".format(self.__class__.__name__, self.id, self.val, self.eow)
