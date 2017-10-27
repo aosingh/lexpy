@@ -1,5 +1,6 @@
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
+[![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
 [![Travis](https://travis-ci.org/aosingh/lexpy.svg?branch=master)](https://travis-ci.org/aosingh/lexpy)
 [![Coverage Status](https://coveralls.io/repos/github/aosingh/lexpy/badge.svg?branch=master)](https://coveralls.io/github/aosingh/lexpy?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/60626f81c0db0c5d8dcd/maintainability)](https://codeclimate.com/github/aosingh/lexpy/maintainability)
@@ -8,7 +9,7 @@
 a dictionary and a lexicon is that in a lexicon there are no values associated with the words. A lexicon is similar to a list of words or a set, but the internal representation is different and optimized
 for faster searches(of words, prefixes and wildcard patterns). Precisely the search time is O(W) where W is the length of the word. 
 
-2 important Lexicon datastructures are:
+2 important Lexicon data-structures are:
 1. Trie.
 3. Directed Acyclic Word Graph(DAWG).
 

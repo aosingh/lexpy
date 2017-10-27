@@ -5,10 +5,10 @@ DISTNAME = 'lexpy'
 AUTHOR = 'Abhishek Singh'
 MAINTAINER = 'Abhishek Singh'
 MAINTAINER_EMAIL = 'aosingh@asu.edu'
-DESCRIPTION = ('Python package for lexicons.')
+DESCRIPTION = ('Python package for lexicon.')
 LICENSE = 'GNU GPLv3'
 URL = 'https://github.com/aosingh/lexpy'
-VERSION = '0.1.1'
+VERSION = '0.8'
 
 PACKAGES = ['lexpy']
 
