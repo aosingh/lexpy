@@ -16,12 +16,12 @@ environment:
       PYTHON_VERSION: "2.7.10"
       PYTHON_ARCH: "64"
 
-    - PYTHON: "C:\\Python27"
-      PYTHON_VERSION: "2.7.9"
+    - PYTHON: "C:\\Python27" # Latest Python version
+      PYTHON_VERSION: "2.7.x"
       PYTHON_ARCH: "32"
 
     - PYTHON: "C:\\Python27-x64"
-      PYTHON_VERSION: "2.7.9"
+      PYTHON_VERSION: "2.7.x"
       PYTHON_ARCH: "64"
 
     - PYTHON: "C:\\Python27"
@@ -49,7 +49,7 @@ install:
 
   # Install Python (from the official .msi of http://python.org) and pip when
   # not already installed.
-  - ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
+  # - ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
 
   # Prepend newly installed Python to the PATH of this build (this cannot be
   # done from inside the powershell script as it would require to restart
