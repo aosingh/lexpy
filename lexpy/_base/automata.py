@@ -1,8 +1,15 @@
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+
 import os
 import types
 
 from lexpy._utils import validate_expression, gen_source, extendList
 from lexpy.exceptions import InvalidWildCardExpressionError
+
+from future.utils import raise_with_traceback
+#from builtins import str
 
 
 class FSA:
@@ -163,7 +170,7 @@ class FSA:
         try:
             wildcard = validate_expression(wildcard)
         except InvalidWildCardExpressionError as e:
-            raise e
+            raise_with_traceback(e)
         if wildcard.isalpha():
             if self.__contains__(wildcard):
                 words.append(wildcard)
@@ -211,13 +218,10 @@ class FSA:
 
         """
         if type(source) not in [list, set, tuple, types.GeneratorType, str, file]:
-            raise ValueError("Source type {0} not supported ".format(type(source)))
+            raise_with_traceback(ValueError("Source type {0} not supported ".format(type(source))))
 
         if type(source) == str and not os.path.exists(source):
-            raise IOError("File does not exists")
-
-        if type(source) in [list, set, tuple]:
-            source = sorted(source)
+            raise_with_traceback(IOError("File does not exists"))
 
         if type(source) in [str, file]:
             source = gen_source(source)
@@ -235,3 +239,7 @@ class FSA:
             :returns (int) Number of words
         """
         return max(0, self._num_of_words - 1)
+
+
+
+

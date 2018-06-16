@@ -1,3 +1,7 @@
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+
 from lexpy._base.node import FSANode
 from lexpy._base.automata import FSA
 

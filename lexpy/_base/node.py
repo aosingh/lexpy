@@ -1,3 +1,8 @@
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+from future.utils import iteritems
+
 from collections import deque
 
 class FSANode:
@@ -68,7 +73,7 @@ class FSANode:
         else:
             strarr.append("0")
 
-        for letter, node in self.children.iteritems():
+        for (letter, node) in iteritems(self.children):
             strarr.append(letter)
             strarr.append(str(node.id))
 

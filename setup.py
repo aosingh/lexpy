@@ -1,3 +1,7 @@
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+
 from setuptools import setup
 
 DISTNAME = 'lexpy'
@@ -12,7 +16,7 @@ VERSION = '0.8'
 
 PACKAGES = ['lexpy']
 
-classifiers=[
+classifiers = [
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Education',
     'Intended Audience :: Developers',
@@ -22,7 +26,7 @@ classifiers=[
     'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     'Programming Language :: Python :: 2.7',
 ]
-keywords='trie suffix-trees lexicon directed-acyclic-word-graph dawg'
+keywords = 'trie suffix-trees lexicon directed-acyclic-word-graph dawg'
 
 
 setup(

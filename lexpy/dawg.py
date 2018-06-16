@@ -1,3 +1,7 @@
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+
 from lexpy._base.node import FSANode
 from lexpy._base.automata import FSA
 
@@ -61,6 +65,11 @@ class DAWG(FSA):
             else:
                 self.__minimized_nodes[child] = child
             self.__unchecked_nodes.pop()
+
+    def add_all(self, source):
+        if type(source) in [list, set, tuple]:
+            source = sorted(source)
+        FSA.add_all(self, source)
 
     def __len__(self):
         """
