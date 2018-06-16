@@ -16,6 +16,8 @@ VERSION = '0.8'
 
 PACKAGES = ['lexpy']
 
+DEPENDENCIES = ['future']
+
 classifiers = [
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Education',
@@ -39,7 +41,8 @@ setup(
     license=LICENSE,
     url=URL,
     version=VERSION,
-    packages = PACKAGES,
+    packages=PACKAGES,
+    install_requires=DEPENDENCIES,
     include_package_data=True,
     classifiers=classifiers,
     keywords=keywords,

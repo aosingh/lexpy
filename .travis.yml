@@ -11,6 +11,7 @@ python:
   - "3.5"
   - "3.6"
 script:
+  - pip install future
   - pip install coverage
   - pip install coveralls
   - coverage run -m unittest discover -s lexpy/tests
