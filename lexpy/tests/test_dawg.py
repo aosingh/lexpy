@@ -164,7 +164,7 @@ class TestDAWGPrefixSearch(unittest.TestCase):
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
         self.assertEqual(4, self.dawg.get_word_count(), "Word count not equal")
         self.assertTrue(self.dawg.contains_prefix('ash'), "Prefix should be present in DAWG")
-        self.assertItemsEqual(self.dawg.search_with_prefix('ash'), ['ashlame', 'ashley', 'ashlo'],
+        self.assertEqual(sorted(self.dawg.search_with_prefix('ash')), sorted(['ashlame', 'ashley', 'ashlo']),
                               'The lists should be equal')
 
 
@@ -175,7 +175,7 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
-        self.assertItemsEqual(self.dawg.search('a*'), ['ash', 'ashley'], 'The lists should be equal')
+        self.assertEqual(sorted(self.dawg.search('a*')), sorted(['ash', 'ashley']), 'The lists should be equal')
 
     def test_dawg_question_search(self):
         self.dawg = DAWG()
@@ -183,7 +183,7 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
-        self.assertItemsEqual(self.dawg.search('a?'), ['ab', 'as'], 'The lists should be equal')
+        self.assertEqual(sorted(self.dawg.search('a?')), sorted(['ab', 'as']), 'The lists should be equal')
 
     def test_dawg_wildcard_search(self):
         self.dawg = DAWG()
@@ -191,7 +191,7 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
-        self.assertItemsEqual(self.dawg.search('*a******?'), ['ab', 'as', 'ash', 'ashley'],
+        self.assertEqual(sorted(self.dawg.search('*a******?')), sorted(['ab', 'as', 'ash', 'ashley']),
                               'The lists should be equal')
 
     def test_dawg_wildcard_exception(self):

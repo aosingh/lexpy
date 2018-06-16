@@ -151,7 +151,7 @@ class TestTriePrefixSearch(unittest.TestCase):
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
         self.assertEqual(4, self.trie.get_word_count(), "Word count not equal")
         self.assertTrue(self.trie.contains_prefix('ash'), "Prefix should be present in Trie")
-        self.assertItemsEqual(self.trie.search_with_prefix('ash'), ['ashlame', 'ashley', 'ashlo'], 'The lists should be equal')
+        self.assertEqual(sorted(self.trie.search_with_prefix('ash')), sorted(['ashlame', 'ashley', 'ashlo']), 'The lists should be equal')
 
 
 class TestWildCardSearch(unittest.TestCase):
@@ -162,7 +162,7 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('ash' in self.trie, "Word should be in trie")
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
-        self.assertItemsEqual(self.trie.search('a*'), ['ash', 'ashley'], 'The lists should be equal')
+        self.assertEqual(sorted(self.trie.search('a*')), sorted(['ash', 'ashley']), 'The lists should be equal')
 
     def test_trie_question_search(self):
         self.trie = Trie()
@@ -170,7 +170,7 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('ash' in self.trie, "Word should be in trie")
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
-        self.assertItemsEqual(self.trie.search('a?'), ['ab', 'as'], 'The lists should be equal')
+        self.assertEqual(sorted(self.trie.search('a?')), sorted(['ab', 'as']), 'The lists should be equal')
 
     def test_trie_wildcard_search(self):
         self.trie = Trie()
@@ -178,7 +178,7 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('ash' in self.trie, "Word should be in trie")
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
-        self.assertItemsEqual(self.trie.search('*a******?'), ['ab', 'as', 'ash', 'ashley'], 'The lists should be equal')
+        self.assertEqual(sorted(self.trie.search('*a******?')), sorted(['ab', 'as', 'ash', 'ashley']), 'The lists should be equal')
 
     def test_trie_wildcard_exception(self):
         self.trie = Trie()
