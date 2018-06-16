@@ -63,7 +63,7 @@ def gen_source(source):
     :param source:
     :return:
     """
-    if type(source) == file:
+    if hasattr(source, 'read'):
         input_file = source
     else:
         input_file = open(source, 'r')

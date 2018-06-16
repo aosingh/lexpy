@@ -217,13 +217,17 @@ class FSA:
             None
 
         """
-        if type(source) not in [list, set, tuple, types.GeneratorType, str, file]:
+        if type(source) in [list, set, tuple, types.GeneratorType, str]:
+            pass
+        elif hasattr(source, 'read'):
+            pass
+        else:
             raise_with_traceback(ValueError("Source type {0} not supported ".format(type(source))))
 
         if type(source) == str and not os.path.exists(source):
             raise_with_traceback(IOError("File does not exists"))
 
-        if type(source) in [str, file]:
+        if type(source) == str or hasattr(source, 'read'):
             source = gen_source(source)
 
         for word in source:
