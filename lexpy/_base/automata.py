@@ -13,14 +13,11 @@ from future.utils import raise_with_traceback
 
 
 class FSA:
+    """
+    Base Class which defines the common methods both for `Trie` and `DAWG`.
+    """
 
     def __init__(self, root):
-        """
-        Description:
-            This method initializes the Trie instance by creating the root node.
-            By default, the id of the root node is 1 and number of words in the Trie is also 1.
-            The label of the root node is an empty string ''.
-        """
         self._id = 1
         self._num_of_words = 1
         self.root = root
