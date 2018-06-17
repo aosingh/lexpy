@@ -68,7 +68,7 @@ class DAWG(FSA):
 
     def add_all(self, source):
         if type(source) in [list, set, tuple]:
-            source = sorted(source)
+            source = sorted([x for x in source if type(x) == str])
         FSA.add_all(self, source)
 
     def __len__(self):
