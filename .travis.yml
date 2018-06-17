@@ -15,5 +15,5 @@ script:
   - pip install coverage
   - pip install coveralls
   - coverage run -m unittest discover -s lexpy/tests
-  - coverage report -m -i --omit /home/travis/virtualenv/*
+  - coverage report -m -i --omit="/home/travis/virtualenv/*"  
   - coveralls
