@@ -1,0 +1,15 @@
+[run]
+branch = False
+
+source =
+    lexpy
+
+omit =
+    /*/tests/*
+    .env/*
+    /home/travis/virtualenv/*
+
+[report]
+
+[html]
+directory = htmlcov
