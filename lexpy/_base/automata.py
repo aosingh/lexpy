@@ -9,6 +9,7 @@ from lexpy._utils import validate_expression, gen_source, extendList
 from lexpy.exceptions import InvalidWildCardExpressionError
 
 from future.utils import raise_with_traceback
+
 #from builtins import str
 
 
@@ -240,6 +241,44 @@ class FSA:
             :returns (int) Number of words
         """
         return max(0, self._num_of_words - 1)
+
+    def search_within_distance(self, word, dist=0):
+        row = range(len(word) + 1)
+        words = []
+        for child in self.root.children:
+            self._search_within_distance(word, self.root.children[child], child, child, words, row, dist)
+        return words
+
+    def _search_within_distance(self, word, node, letter, new_word, words, row, dist=0):
+        cols = len(word) + 1
+        curr_row = [row[0] + 1]
+        for col in range(1, cols):
+            i = curr_row[col-1] + 1
+            d = row[col] + 1
+            if word[col-1] != letter:
+                r = row[col-1] + 1
+            else:
+                r = row[col-1]
+            curr_row.append(min(i, d, r))
+
+        if curr_row[-1] <= dist and node.eow:
+            words.append(new_word)
+
+        if min(curr_row) <= dist:
+            for child_node in node.children:
+                self._search_within_distance(word,
+                                             node.children[child_node],
+                                             child_node,
+                                             new_word+child_node,
+                                             words,
+                                             curr_row,
+                                             dist)
+
+
+
+
+
+
 
 
 

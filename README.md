@@ -27,8 +27,17 @@ Both Trie and DAWG are Finite State Automaton(FSA)
 ```commandline
 pip install lexpy
 ```
-# Examples
-Note: Detailed Documentation is in progress.
+
+# Interface
+| **Interface Description**                                                                                                     | **Trie** method                           | **DAWG** method                           |
+|-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|-------------------------------------------|
+| Add a single word                                                                                                             | `add('apple')`                            | `add('apple')`                            |
+| Add multiple words                                                                                                            | `add_all(['advantage', 'courage'])`       | `add_all(['advantage', 'courage'])`       |
+| Check if exists?                                                                                                              | `in` operator                             | `in` operator                             |
+| Search using wildcard  expression                                                                                             | `search('a?b*')`                          | `search('a?b*)`                           |
+| Search for prefix matches                                                                                                     | `search_with_prefix('bar')`               | `search_with_prefix('bar')`               |
+| Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance (LD) | `search_within_distance('apble', dist=1)` | `search_within_distance('apble', dist=1)` |
+
 
 ## Trie
 ```python
@@ -86,6 +95,7 @@ len(dawg) # Number of nodes in DAWG
 13
 
 ```
+
 
 
 *Fun Facts* :
