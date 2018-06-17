@@ -27,7 +27,7 @@ Both Trie and DAWG are Finite State Automaton(FSA)
 ```commandline
 pip install lexpy
 ```
->For versions older than 0.9.3, there is a problem in the package distribution
+For versions older than 0.9.3, there is a problem in the package distribution
 which has been resolved now in 0.9.3. I apologize, if that frustrated anyone.
 Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 
@@ -45,7 +45,7 @@ Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 
 # Examples
 
->Although, the examples below are shown only for trie, they can be used for a DAWG in the same way.
+Although, the examples below are shown only for trie, they can be used for a DAWG in the same way.
 Both Trie and DAWG support the same set of operations as shown in the above table.
 
 However, do read the section on  "DAWG".
@@ -111,8 +111,8 @@ print(trie.search_with_prefix('ab'))
 
 3. Wildcard search using `?` and `*`
 
-   a.`?` = 0 or 1 occurance of any character
-   b.`*` = 0 or more occurance of any character
+`?` = 0 or 1 occurance of any character
+`*` = 0 or more occurance of any character
 
 ```python
 print(trie.search('a*o*'))
@@ -120,13 +120,12 @@ print(trie.search('a*o*'))
 
 print(trie.search('su?t'))
 [u'suit']
-```
 
 4. Search for similar words using the notion of Levenstien Distance(LD)
 
-```python
 print(trie.search_within_distance('arie', dist=2))
 ['arbil', 'auric', 'athie']
+
 ```
 
 # Directed Acyclic Word Graph (DAWG)
