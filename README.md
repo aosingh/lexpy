@@ -111,8 +111,9 @@ print(trie.search_with_prefix('ab'))
 
 3. Wildcard search using `?` and `*`
 
-   a.`?` = 0 or 1 occurance of any character
-   b.`*` = 0 or more occurance of any character
+`?` = 0 or 1 occurance of any character
+
+`*` = 0 or more occurance of any character
 
 ```python
 print(trie.search('a*o*'))
