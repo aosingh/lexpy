@@ -45,6 +45,11 @@ Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 
 # Examples
 
+Although, the examples below are shown only for trie, they can be used for a DAWG in the same way.
+Both Trie and DAWG support the same set of operations as shown in the above table.
+
+However, do read the section on  "DAWG".
+
 ## Ways to build a Trie or a DAWG.
 
 1. From an input list, set, or tuple of words.
@@ -53,62 +58,24 @@ Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 from lexpy.trie import Trie
 trie = Trie()
 input_words = [
-    'ampyx',
-    'abuzz',
-    'athie',
-    'amato',
-    'aneto',
-    'aruba',
-    'arrow',
-    'agony',
-    'altai',
-    'alisa',
-    'acorn',
-    'abhor',
-    'aurum',
-    'albay',
-    'arbil',
-    'albin',
-    'almug',
-    'artha',
-    'algin',
-    'auric',
-    'sore',
-    'quilt',
-    'psychotic',
-    'eyes'
-    'cap'
-    'suit'
-    'tank'
-    'common'
-    'lonely'
-    'likeable'
-    'language',
-    'shock',
-    'look',
-    'pet',
-    'dime',
-    'small'
-    'dusty',
-    'accept',
-    'nasty',
-    'thrill',
-    'foot',
-    'steel'
+    'ampyx', 'abuzz', 'athie', 'amato', 'aneto', 'aruba', 'arrow', 'agony', 'altai', 'alisa',
+    'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin', 'almug', 'artha', 'algin', 'auric',
+    'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit', 'tank', 'common', 'lonely', 'likeable'
+    'language', 'shock', 'look', 'pet', 'dime', 'small' 'dusty', 'accept', 'nasty', 'thrill',
+    'foot', 'steel'
 ]
 
 trie.add_all(input_words) # You can pass any sequence types of a file like object here
 
 print trie.get_word_count()
-34
-
+40
 ```
 
 2. Use the `build_trie_from_file()` method
 
 ```python
 from lexpy.utils import build_trie_from_file
-trie = build_trie_from_file('path/to/file')
+trie = build_trie_from_file('/path/to/file')
 
 ```
 
@@ -121,14 +88,47 @@ from lexpy.trie import Trie
 trie.add_all('/path/to/file.txt')
 
 # Or
-with open('path/to/file.txt', 'r') as infile:
+with open('/path/to/file.txt', 'r') as infile:
      trie.add_all(infile)
 
 ```
 
+## Search
 
+1. Check if exists using the `in` operator
 
-## Directed Acyclic Word Graph (DAWG)
+```python
+print 'ampyx' in trie
+True
+```
+
+2. Prefix search
+
+```python
+print(trie.search_with_prefix('ab'))
+['abhor', 'abuzz']
+```
+
+3. Wildcard search using `?` and `*`
+
+`?` = 0 or 1 occurance of any character
+`*` = 0 or more occurance of any character
+
+```python
+print(trie.search('a*o*'))
+[u'acorn', u'abhor', u'agony', u'amato', u'aneto', u'arrow']
+
+print(trie.search('su?t'))
+[u'suit']
+
+4. Search for similar words using the notion of Levenstien Distance(LD)
+
+print(trie.search_within_distance('arie', dist=2))
+['arbil', 'auric', 'athie']
+
+```
+
+# Directed Acyclic Word Graph (DAWG)
 
 >DAWG supports the same set of operations as a Trie. The difference is the number of nodes in a DAWG is always
 less than or equal to the number of nodes in Trie. They both are Deterministic Finite State Automata. 
