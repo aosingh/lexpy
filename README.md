@@ -27,6 +27,9 @@ Both Trie and DAWG are Finite State Automaton(FSA)
 ```commandline
 pip install lexpy
 ```
+For versions older than 0.9.3, there is a problem in the package distribution
+which has been resolved now in 0.9.3. I apologize, if that frustrated anyone.
+Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 
 # Interface
 
@@ -40,41 +43,100 @@ pip install lexpy
 | Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance (LD) 	| `search_within_distance('apble', dist=1)` 	| `search_within_distance('apble', dist=1)` 	|
 
 
-## Trie
+# Examples
+
+## Ways to build a Trie or a DAWG.
+
+1. From an input list, set, or tuple of words.
+
 ```python
 from lexpy.trie import Trie
 trie = Trie()
-trie.add_all(['abc', 'abcc', 'abcd']) # You can pass a set, list, generator or an input file or words
-trie.get_word_count()
-3
+input_words = [
+    'ampyx',
+    'abuzz',
+    'athie',
+    'amato',
+    'aneto',
+    'aruba',
+    'arrow',
+    'agony',
+    'altai',
+    'alisa',
+    'acorn',
+    'abhor',
+    'aurum',
+    'albay',
+    'arbil',
+    'albin',
+    'almug',
+    'artha',
+    'algin',
+    'auric',
+    'sore',
+    'quilt',
+    'psychotic',
+    'eyes'
+    'cap'
+    'suit'
+    'tank'
+    'common'
+    'lonely'
+    'likeable'
+    'language',
+    'shock',
+    'look',
+    'pet',
+    'dime',
+    'small'
+    'dusty',
+    'accept',
+    'nasty',
+    'thrill',
+    'foot',
+    'steel'
+]
 
-# Wildcard Pattern
-trie.search('a*')
-['abc', 'abcc', 'abcd']
+trie.add_all(input_words) # You can pass any sequence types of a file like object here
 
-trie.search('*d')
-['abcd']
-
-trie.add('axe') # Add a single word
-
-trie.get_word_count()
-4
-
-
-trie.search_with_prefix('ax')
-['axe']
+print trie.get_word_count()
+34
 
 ```
+
+2. Use the `build_trie_from_file()` method
+
+```python
+from lexpy.utils import build_trie_from_file
+trie = build_trie_from_file('path/to/file')
+
+```
+
+3. From a file-like object.
+```python
+
+from lexpy.trie import Trie
+
+# Either
+trie.add_all('/path/to/file.txt')
+
+# Or
+with open('path/to/file.txt', 'r') as infile:
+     trie.add_all(infile)
+
+```
+
+
 
 ## Directed Acyclic Word Graph (DAWG)
 
 >DAWG supports the same set of operations as a Trie. The difference is the number of nodes in a DAWG is always
 less than or equal to the number of nodes in Trie. They both are Deterministic Finite State Automata. 
-However DAWG is a minimized version of the Trie DFA. (More stats coming in documentation). 
-In Trie, prefix redundancy is removed.
-In DAWG, both prefix and suffix redundancies are removed.
+However, DAWG is a minimized version of the Trie DFA.
+In a Trie, prefix redundancy is removed.
+In a DAWG, both prefix and suffix redundancies are removed.
 
-In the current implementation of DAWG, the insertion order of the words should be alphabetical. 
+In the current implementation of DAWG, the insertion order of the words should be **alphabetical**.
 
 
 ```python
