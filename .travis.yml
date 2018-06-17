@@ -14,6 +14,6 @@ script:
   - pip install future
   - pip install coverage
   - pip install coveralls
-  - coverage run -m unittest --source lexpy/tests
+  - coverage run -m unittest discover -s lexpy/tests
   - coverage report
   - coveralls
