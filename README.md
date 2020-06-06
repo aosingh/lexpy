@@ -1,4 +1,4 @@
-**Note** Support for Python 2.7 will be discontinued in future versions (> 0.9.93)
+**Note** Support for Python 2.7 will be discontinued in future versions (> 0.9.3)
 
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
