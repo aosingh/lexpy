@@ -1,3 +1,5 @@
+**Note** Support for Python 2.7 will be discontinued in future versions (> 0.9.93)
+
 ![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
