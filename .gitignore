@@ -9,3 +9,4 @@ sampledawg.py
 dist
 lexpy.egg-info
 build
+.venv
