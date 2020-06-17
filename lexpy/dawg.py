@@ -61,7 +61,7 @@ class DAWG(FSA):
         for i in range(len(self.__unchecked_nodes)-1, to-1, -1):
             (parent, letter, child) = self.__unchecked_nodes[i]
             if child in self.__minimized_nodes:
-                parent.children[letter] = child
+                parent.children[letter] = self.__minimized_nodes[child]
             else:
                 self.__minimized_nodes[child] = child
             self.__unchecked_nodes.pop()
