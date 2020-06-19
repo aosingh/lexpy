@@ -81,4 +81,5 @@ class DAWG(FSA):
             :returns (int) Number of Nodes in the dawg data structure
         :return:
         """
-        return 1+len(self.__minimized_nodes) # 1(for the root node) + Minimized list of nodes
+        # 1(for the root node) + Minimized list of nodes
+        return 1+len(self.__minimized_nodes)
