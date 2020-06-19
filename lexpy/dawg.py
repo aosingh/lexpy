@@ -47,8 +47,9 @@ class DAWG(FSA):
         for letter in word[common_prefix_index:]:
             _id = self._id + 1
             node.add_child(letter, _id)
-            self.__unchecked_nodes.append((node, letter, node[letter]))
-            node = node[letter]
+            self.__unchecked_nodes.append((node, letter, node.children[letter]))
+            node = node.children[letter]
+            self._id = _id
 
         node.eow = True
         self._num_of_words += 1
@@ -61,7 +62,7 @@ class DAWG(FSA):
         for i in range(len(self.__unchecked_nodes)-1, to-1, -1):
             (parent, letter, child) = self.__unchecked_nodes[i]
             if child in self.__minimized_nodes:
-                parent.children[letter] = child
+                parent.children[letter] = self.__minimized_nodes[child]
             else:
                 self.__minimized_nodes[child] = child
             self.__unchecked_nodes.pop()

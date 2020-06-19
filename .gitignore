@@ -10,3 +10,4 @@ dist
 lexpy.egg-info
 build
 .venv
+dawg_sample.py

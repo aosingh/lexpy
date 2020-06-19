@@ -4,6 +4,8 @@ from __future__ import absolute_import
 
 from setuptools import setup, find_packages
 
+from lexpy import __version__
+
 LONG_DESCRIPTION = 'A lexicon is a data-structure which stores a set of words. ' \
                    'The difference between a dictionary and a lexicon is that in a lexicon there are no values associated with the words. ' \
                    'A lexicon is similar to a list of words or a set, but the internal representation is different and optimized for faster searches(of words, prefixes and wildcard patterns). ' \
@@ -18,7 +20,7 @@ MAINTAINER_EMAIL = 'aosingh@asu.edu'
 DESCRIPTION = ('Python package for lexicon.')
 LICENSE = 'GNU GPLv3'
 URL = 'https://github.com/aosingh/lexpy'
-VERSION = '0.9.3'
+VERSION = __version__
 
 PACKAGES = ['lexpy']
 
@@ -33,10 +35,10 @@ classifiers = [
     'Topic :: Text Processing :: Indexing',
     'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     'Programming Language :: Python :: 2.7',
-    'Programming Language :: Python :: 3.3',
-    'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
     'Operating System :: POSIX :: Linux',
     'Operating System :: Unix',
     'Operating System :: Microsoft :: Windows',

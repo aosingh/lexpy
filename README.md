@@ -43,6 +43,7 @@ Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 | Search using wildcard expression                                                                                              	| `search('a?b*')`                          	| `search('a?b*)`                           	|
 | Search for prefix matches                                                                                                     	| `search_with_prefix('bar')`               	| `search_with_prefix('bar')`               	|
 | Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance (LD) 	| `search_within_distance('apble', dist=1)` 	| `search_within_distance('apble', dist=1)` 	|
+| Get the number of nodes in the automaton 	| `len(trie)` 	| `len(dawg)` 	|
 
 
 # Examples
@@ -100,7 +101,7 @@ with open('/path/to/file.txt', 'r') as infile:
 1. Check if exists using the `in` operator
 
 ```python
-print 'ampyx' in trie
+print('ampyx' in trie)
 True
 ```
 
