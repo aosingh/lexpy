@@ -12,12 +12,6 @@ from setuptools import setup, find_packages
 
 from lexpy import __version__
 
-LONG_DESCRIPTION = 'A lexicon is a data-structure which stores a set of words. ' \
-                   'The difference between a dictionary and a lexicon is that in a lexicon there are no values associated with the words. ' \
-                   'A lexicon is similar to a list of words or a set, but the internal representation is different and optimized for faster searches(of words, prefixes and wildcard patterns). ' \
-                   'Precisely the search time is O(W) where W is the length of the word. ' \
-                   'Lexpy is pure python package which implements 2 important lexicon Data-structures Trie and Directed' \
-                   'Acyclic Word Graph(DAWG). '
 DISTNAME = 'lexpy'
 
 AUTHOR = 'Abhishek Singh'
@@ -70,5 +64,5 @@ setup(
     install_requires=DEPENDENCIES,
     include_package_data=True,
     classifiers=classifiers,
-    keywords=keywords,
+    keywords=keywords.split(),
 )
