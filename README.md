@@ -1,7 +1,6 @@
-**Note** Support for Python 2.7 will be discontinued in future versions (> 0.9.3)
+![lexpy logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
 
-![Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
-
+[![Downloads](https://pepy.tech/badge/lexpy)](https://pepy.tech/project/lexpy)
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
 [![Travis](https://travis-ci.org/aosingh/lexpy.svg?branch=master)](https://travis-ci.org/aosingh/lexpy)
 [![Build status](https://ci.appveyor.com/api/projects/status/hib5wm4qo2oop3ui?svg=true)](https://ci.appveyor.com/project/aosingh/lexpy)
@@ -29,9 +28,6 @@ Both Trie and DAWG are Finite State Automaton(FSA)
 ```commandline
 pip install lexpy
 ```
->For versions older than 0.9.3, there is a problem in the package distribution
-which has been resolved now in 0.9.3. I apologize, if that frustrated anyone.
-Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 
 # Interface
 
@@ -48,10 +44,9 @@ Lexpy version `0.9.3` is recommended and it supports both Python 2 and Python 3.
 
 # Examples
 
->Although, the examples below are shown only for trie, they can be used for a DAWG in the same way.
-Both Trie and DAWG support the same set of operations as shown in the above table.
-
-However, do read the section on  "DAWG".
+Although, the examples below are shown only for trie, they can be used for a DAWG in the same way.
+Both Trie and DAWG support the same set of operations as shown in the above table. However, do read the section on 
+"DAWG".
 
 ## Ways to build a Trie or a DAWG.
 
@@ -70,7 +65,7 @@ input_words = [
 
 trie.add_all(input_words) # You can pass any sequence types of a file like object here
 
-print trie.get_word_count()
+print(trie.get_word_count())
 40
 ```
 
@@ -120,17 +115,17 @@ print(trie.search_with_prefix('ab'))
 
 ```python
 print(trie.search('a*o*'))
-[u'acorn', u'abhor', u'agony', u'amato', u'aneto', u'arrow']
+['amato', 'abhor', 'aneto', 'arrow', 'agony', 'acorn']
 
 print(trie.search('su?t'))
-[u'suit']
+['suit']
 ```
 
 4. Search for similar words using the notion of Levenstien Distance(LD)
 
 ```python
 print(trie.search_within_distance('arie', dist=2))
-['arbil', 'auric', 'athie']
+['athie', 'arbil', 'auric']
 ```
 
 # Directed Acyclic Word Graph (DAWG)
@@ -160,10 +155,9 @@ len(trie) # Number of Nodes in Trie
 dawg.reduce() # Perform DFA minimization. Call this every time a chunk of words are uploaded in DAWG.
 
 len(dawg) # Number of nodes in DAWG
-13
+16
 
 ```
-
 
 
 *Fun Facts* :
