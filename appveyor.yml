@@ -6,39 +6,29 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
 
   matrix:
-    # Python 2.7.10 is the latest version and is not pre-installed.
-
-    - PYTHON: "C:\\Python27.10"
-      PYTHON_VERSION: "2.7.10"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python27.10-x64"
-      PYTHON_VERSION: "2.7.10"
+    - PYTHON: "C:\\Python38-x64"
+      PYTHON_VERSION: "3.8.x"
       PYTHON_ARCH: "64"
 
-    - PYTHON: "C:\\Python27" # Latest Python version
-      PYTHON_VERSION: "2.7.x"
+    - PYTHON: "C:\\Python38"
+      PYTHON_VERSION: "3.8.x"
       PYTHON_ARCH: "32"
 
-    - PYTHON: "C:\\Python27-x64"
-      PYTHON_VERSION: "2.7.x"
+    - PYTHON: "C:\\Python37-x64"
+      PYTHON_VERSION: "3.7.x"
       PYTHON_ARCH: "64"
 
-    - PYTHON: "C:\\Python27"
-      PYTHON_VERSION: "2.7.10"
+    - PYTHON: "C:\\Python37"
+      PYTHON_VERSION: "3.7.x"
       PYTHON_ARCH: "32"
 
-    - PYTHON: "C:\\Python27-x64"
-      PYTHON_VERSION: "2.7.10"
+    - PYTHON: "C:\\Python36-x64"
+      PYTHON_VERSION: "3.6.x"
       PYTHON_ARCH: "64"
 
-    - PYTHON: "C:\\Python270"
-      PYTHON_VERSION: "2.7.0"
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: "3.6.x"
       PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python270-x64"
-      PYTHON_VERSION: "2.7.0"
-      PYTHON_ARCH: "64"
 
 install:
   - ECHO "Filesystem root:"
@@ -62,13 +52,12 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
-  - "c:\\python27-x64\\python.exe -m pip install --disable-pip-version-check --user --upgrade pip"
+  - "c:\\python38-x64\\python.exe -m pip install --disable-pip-version-check --user --upgrade pip"
 
   # Install the build dependencies of the project.
   # - "%CMD_IN_ENV% pip install -r requirements.txt"
-  - cmd: pip install future
-  - cmd: pip install coverage
-  - cmd: pip install nose
+  - cmd: python -m pip install coverage
+  - cmd: python -m pip install nose
 
 
 build_script:
@@ -76,4 +65,5 @@ build_script:
 
 test_script:
   # Run the project tests
-  - cmd: python setup.py nosetests"
+  - cmd: python -m coverage run -m unittest discover -s lexpy/tests
+  - cmd: python -m coverage report -i -m

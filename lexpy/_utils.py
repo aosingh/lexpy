@@ -1,21 +1,16 @@
-from __future__ import unicode_literals
-
 import re
+from contextlib import closing
+
 from lexpy.exceptions import InvalidWildCardExpressionError
 
-'''
-Define common internal utility functions here
-'''
+__all__ = ['validate_expression', 'gen_source']
 
-'''
- A '?' followed by an '*' in the wildcard expr is illegal
-'''
+# A '?' followed by an '*' in the wildcard expr is illegal
 __questionmark_after_asterisk_re = r'\?+(?=\*+)'
 __questionmark_after_asterisk_pattern = re.compile(__questionmark_after_asterisk_re)
 
-'''
-Any special character apart from '*' or '?' is illegal.
-'''
+
+# Any special character apart from '*' or '?' is illegal.
 __illegal_characters_re = r'[^\w?*]+'
 __illegal_characters_pattern = re.compile(__illegal_characters_re)
 
@@ -23,7 +18,7 @@ __illegal_characters_pattern = re.compile(__illegal_characters_re)
 def validate_expression(wildcard_expression):
     """
     Description:
-        Validates and shortens the wild card expression(if needed) without changing the meaning .
+        Validates and shortens the wild card expression(if needed) without changing the intended meaning .
 
     Args:
         :arg (str) wild card expression
@@ -60,21 +55,15 @@ def validate_expression(wildcard_expression):
 def gen_source(source):
     """
 
-    :param source:
-    :return:
     """
     if hasattr(source, 'read'):
         input_file = source
     else:
         input_file = open(source, 'r')
-    for line in input_file:
-        yield line.strip()
-    input_file.close()
 
+    with closing(input_file):
+        for line in input_file:
+            yield line.strip()
 
-def extendList(source, addthis):
-    if addthis is not None and len(addthis) > 0:
-        source.extend(addthis)
-    return source
 
 

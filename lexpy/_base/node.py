@@ -1,15 +1,12 @@
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
-from future.utils import iteritems
-
-from collections import deque
-
 class FSANode:
     """
-    Class for Finite State Automaton(FSA) Node. Both Trie and Directed-Acyclic-Word-Graph(DAWG) nodes inherit from
-    this class.
+    Class for Finite State Automaton(FSA) Node. Both Trie and Directed Acyclic Word Graph (DAWG) node definitions
+    inherit from this class.
+
     """
+
+    __slots__ = 'id', 'val', 'children', 'eow', 'count'
+
     def __init__(self, _id, val):
         """
         Description:
@@ -19,10 +16,24 @@ class FSANode:
             :arg _id (int) Unique numerical ID assigned to this node.
             :arg val (str) The Letter from alphabet.
         """
+
         self.id = _id
         self.val = val
         self.children = {}
         self.eow = False
+        self.count = 0
+
+    def add_child(self, letter, _id=None):
+        """
+        Description:
+            To add a child edge to the current Node.
+
+        Args:
+            :arg letter (str) The character label that the child node will have.
+            :arg id (int) Unique numerical ID assigned to this node.
+
+        """
+        self.children[letter] = FSANode(_id, letter)
 
     def __getitem__(self, letter):
         """
@@ -38,28 +49,6 @@ class FSANode:
         """
         return self.children[letter]
 
-    '''
-    def __iter__(self):
-        """
-        Description:
-            Iterate over a node in a Breadth First Search(BFS) manner.
-
-        Args:
-            :arg (FSANode)
-
-        Returns:
-            :returns : A generator expression which can be used to iterate over the children of this node
-
-        :return:
-        """
-        queue = deque()
-        queue.append(self)
-        while queue:
-            current_node = queue.popleft()
-            yield current_node
-            queue.extend([child for _, child in current_node.children.iteritems()])
-    '''
-
     def __str__(self):
         """
         Description:
@@ -67,17 +56,18 @@ class FSANode:
 
         :return:
         """
-        strarr = []
+        strarr = [self.val, str(self.count)]
+
         if self.eow:
             strarr.append("1")
         else:
             strarr.append("0")
 
-        for (letter, node) in iteritems(self.children):
+        for letter, node in self.children.items():
             strarr.append(letter)
             strarr.append(str(node.id))
 
-        return ",".join(strarr)
+        return "".join(strarr)
 
     def __eq__(self, other):
         """
@@ -104,4 +94,4 @@ class FSANode:
             Returns a nicely formatted string of the FSA node. This is invoked when `repr()` is called.
         :return:
         """
-        return "{0}(id={1}, label={2}, EOW={3})".format(self.__class__.__name__, self.id, self.val, self.eow)
+        return "{0}(id={1}, label={2}, EOW={3}, count={4})".format(self.__class__.__name__, self.id, self.val, self.eow, self.count)

@@ -1,12 +1,8 @@
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
-
-class Error(Exception):
+class LexpyError(Exception):
     pass
 
 
-class InvalidWildCardExpressionError(Error):
+class InvalidWildCardExpressionError(LexpyError):
 
     def __init__(self, expr, message):
         self.expr = expr

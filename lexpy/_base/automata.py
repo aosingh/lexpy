@@ -1,22 +1,18 @@
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
-
 import os
-import types
 
-from lexpy._utils import validate_expression, gen_source, extendList
+from types import GeneratorType
+
+from lexpy._utils import validate_expression, gen_source
 from lexpy.exceptions import InvalidWildCardExpressionError
-
-from future.utils import raise_with_traceback
-
-#from builtins import str
 
 
 class FSA:
     """
     Base Class which defines the common methods both for `Trie` and `DAWG`.
+
     """
+
+    __slots__ = '_id', '_num_of_words', 'root'
 
     def __init__(self, root):
         self._id = 1
@@ -39,8 +35,7 @@ class FSA:
         if word is None:
             return False
         node = self.root
-        for i in range(0, len(word)):
-            letter = word[i]
+        for i, letter in enumerate(word):
             if letter in node.children:
                 node = node[letter]
                 if node.eow and i == len(word) - 1:
@@ -66,8 +61,7 @@ class FSA:
         if prefix is None:
             return False, None
         node = self.root
-        for i in range(0, len(prefix)):
-            letter = prefix[i]
+        for i, letter in enumerate(prefix):
             if letter in node.children:
                 node = node[letter]
             else:
@@ -91,65 +85,81 @@ class FSA:
 
 
     @staticmethod
-    def __words_with_wildcard(node, wildcard, index, currentWord):
+    def __words_with_wildcard(node, wildcard, index, current_word="", with_count=False):
         """
         Description:
             Returns all the words where the wildcard pattern matches.
             This method uses backtracking to recursively traverse nodes in the DAWG for wildcard characters '?' and '*'
 
         Args:
-            :arg node(lexpy.dawg.DAWG): Current Node in the DAWG
+            :arg node (lexpy._base.node.FSANode): Current Node in the Finite State Automaton
+
             :arg wildcard (str) : The wildcard pattern as input
+
             :arg index (int): The current index in the wildcard pattern
-            :arg currentWord (str): Word formed till now
+
+            :arg current_word (str): Word formed till now
 
         Returns:
             :returns words(list): Returns the list of words where the wildcard pattern matches.
 
         """
-        if node is None or wildcard is None or wildcard == '' or index < 0:
-            return None
+        if not node or not wildcard or index < 0:
+            return []
 
-        if node.eow \
-                and index >= len(wildcard) \
-                and currentWord is not None \
-                and len(currentWord) != 0:
-            return [currentWord]
+        if node.eow and index >= len(wildcard) and current_word:
+            return [(current_word, node.count)] if with_count else [current_word]
 
         if index >= len(wildcard):
-            return None
-
-        if currentWord is None:
-            currentWord = ""
+            return []
 
         words = []
         letter = wildcard[index]
+
         if letter == '?':
             for child in node.children:
-                childnode = node[child]
-                new_word = currentWord + child
-                childwords = FSA.__words_with_wildcard(childnode, wildcard, index + 1, new_word)
-                words = extendList(words, childwords)
+                child_node = node[child]
+
+                child_words = FSA.__words_with_wildcard(child_node,
+                                                        wildcard,
+                                                        index + 1,
+                                                        current_word + child,
+                                                        with_count=with_count)
+                words.extend(child_words)
+
         elif letter == '*':
-            words_at_current_level = FSA.__words_with_wildcard(node, wildcard, index + 1, currentWord)
-            words = extendList(words, words_at_current_level)
+            words_at_current_level = FSA.__words_with_wildcard(node,
+                                                               wildcard,
+                                                               index + 1,
+                                                               current_word,
+                                                               with_count=with_count)
+            words.extend(words_at_current_level)
+
             if node.children:
                 for child in node.children:
-                    childnode = node[child]
-                    new_word = currentWord + child
-                    childwords = FSA.__words_with_wildcard(childnode, wildcard, index, new_word)
-                    words = extendList(words, childwords)
+                    child_node = node[child]
+                    child_words = FSA.__words_with_wildcard(child_node,
+                                                            wildcard,
+                                                            index,
+                                                            current_word + child,
+                                                            with_count=with_count)
+                    words.extend(child_words)
             elif node.eow and index == len(wildcard) - 1:
-                return [currentWord]
+                return [(current_word, node.count)] if with_count else [current_word]
+
         else:
             if letter in node.children:
-                childnode = node[letter]
-                new_word = currentWord + childnode.val
-                childwords = FSA.__words_with_wildcard(childnode, wildcard, index + 1, new_word)
-                words = extendList(words, childwords)
+                child_node = node[letter]
+                child_words = FSA.__words_with_wildcard(child_node,
+                                                        wildcard,
+                                                        index + 1,
+                                                        current_word + child_node.val,
+                                                        with_count=with_count)
+                words.extend(child_words)
+
         return words
 
-    def search(self, wildcard):
+    def search(self, wildcard, with_count=False):
         """
         Description:
             Returns all the words where the wildcard pattern matches.
@@ -162,21 +172,26 @@ class FSA:
 
         """
         words = []
-        assert wildcard is not None, "Search word cannot be None"
+        if wildcard is None:
+            raise ValueError("Search pattern cannot be None")
+
         if wildcard == '':
             return words
         try:
             wildcard = validate_expression(wildcard)
-        except InvalidWildCardExpressionError as e:
-            raise_with_traceback(e)
-        if wildcard.isalpha():
-            if self.__contains__(wildcard):
-                words.append(wildcard)
-            return words
-        result = FSA.__words_with_wildcard(self.root, wildcard, 0, None)
-        return result
+        except InvalidWildCardExpressionError:
+            raise
 
-    def search_with_prefix(self, prefix):
+        if wildcard.isalpha():
+            present, node = self.__contains_prefix(wildcard)
+            if present and node.eow:
+                words.append((wildcard, node.count)) if with_count else words.append(wildcard)
+                #words.append(wildcard)
+            return words
+
+        return FSA.__words_with_wildcard(self.root, wildcard, 0, self.root.val, with_count=with_count)
+
+    def search_with_prefix(self, prefix, with_count=False):
         """
         Description:
             Returns a list of words which share the same prefix as passed in input. The words are by default sorted
@@ -189,13 +204,12 @@ class FSA:
             :returns (list) words: which share the same prefix as passed in input
 
         """
-        words = []
-        if prefix == '' or prefix is None:
-            return None
+        if not prefix:
+            return []
         _, node = self.__contains_prefix(prefix)
         if node is None:
-            return None
-        return FSA.__words_with_wildcard(node, '*', 0, prefix)
+            return []
+        return FSA.__words_with_wildcard(node, '*', 0, prefix, with_count=with_count)
 
     def add_all(self, source):
         """
@@ -215,17 +229,17 @@ class FSA:
             None
 
         """
-        if type(source) in [list, set, tuple, types.GeneratorType, str]:
+        if isinstance(source, (GeneratorType, str, list, tuple, set)):
             pass
         elif hasattr(source, 'read'):
             pass
         else:
-            raise_with_traceback(ValueError("Source type {0} not supported ".format(type(source))))
+            raise ValueError("Source type {0} not supported ".format(type(source)))
 
-        if type(source) == str and not os.path.exists(source):
-            raise_with_traceback(IOError("File does not exists"))
+        if isinstance(source, str) and not os.path.exists(source):
+            raise IOError("File does not exists")
 
-        if type(source) == str or hasattr(source, 'read'):
+        if isinstance(source, str) or hasattr(source, 'read'):
             source = gen_source(source)
 
         for word in source:
@@ -242,14 +256,16 @@ class FSA:
         """
         return max(0, self._num_of_words - 1)
 
-    def search_within_distance(self, word, dist=0):
-        row = range(len(word) + 1)
+    def search_within_distance(self, word, dist=0, with_count=False):
+        row = list(range(len(word) + 1))
         words = []
         for child in self.root.children:
-            self._search_within_distance(word, self.root.children[child], child, child, words, row, dist)
+            self._search_within_distance(word, self.root.children[child],
+                                         child, child, words,
+                                         row, dist, with_count=with_count)
         return words
 
-    def _search_within_distance(self, word, node, letter, new_word, words, row, dist=0):
+    def _search_within_distance(self, word, node, letter, new_word, words, row, dist=0, with_count=False):
         cols = len(word) + 1
         curr_row = [row[0] + 1]
         for col in range(1, cols):
@@ -262,17 +278,14 @@ class FSA:
             curr_row.append(min(i, d, r))
 
         if curr_row[-1] <= dist and node.eow:
-            words.append(new_word)
+            words.append((new_word, node.count)) if with_count else words.append(new_word)
 
         if min(curr_row) <= dist:
             for child_node in node.children:
-                self._search_within_distance(word,
-                                             node.children[child_node],
-                                             child_node,
-                                             new_word+child_node,
-                                             words,
-                                             curr_row,
-                                             dist)
+                self._search_within_distance(word, node.children[child_node],
+                                             child_node, new_word+child_node,
+                                             words, curr_row, dist,
+                                             with_count=with_count)
 
 
 

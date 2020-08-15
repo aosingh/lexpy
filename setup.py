@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
 from os import path
 
 this_directory = path.abspath(path.dirname(__file__))
@@ -24,7 +21,6 @@ VERSION = __version__
 
 PACKAGES = ['lexpy']
 
-DEPENDENCIES = ['future']
 
 classifiers = [
     'Development Status :: 4 - Beta',
@@ -61,7 +57,6 @@ setup(
     version=VERSION,
     packages=find_packages(exclude=("tests",)),
     package_dir={'lexpy': 'lexpy'},
-    install_requires=DEPENDENCIES,
     include_package_data=True,
     classifiers=classifiers,
     keywords=keywords.split(),
