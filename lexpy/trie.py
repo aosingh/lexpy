@@ -1,27 +1,12 @@
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
-
 from lexpy._base.node import FSANode
 from lexpy._base.automata import FSA
 
-
-class _TrieNode(FSANode):
-
-    def add_child(self, letter, _id=None):
-        """
-        Description:
-            To add a child edge to the current Node.
-
-        Args:
-            :arg letter (str) The character label that the child node will have.
-            :arg id (int) Unique numerical ID assigned to this node.
-
-        """
-        self.children[letter] = _TrieNode(_id, letter)
+__all__ = ['Trie']
 
 
 class Trie(FSA):
+
+    __slots__ = 'root'
 
     """
     Description:
@@ -38,8 +23,9 @@ class Trie(FSA):
             By default, the id of the root node is 1 and number of words in the Trie is also 1.
             The label of the root node is an empty string ''.
         """
-        root = _TrieNode(1, '')
-        FSA.__init__(self, root)
+        root = FSANode(0, '')
+        super(Trie, self).__init__(root)
+
 
     def __len__(self):
         """
@@ -52,7 +38,7 @@ class Trie(FSA):
         """
         return self._id
 
-    def add(self, word):
+    def add(self, word, count=1):
         """
         Description:
             Adds a word in the trie data structure.
@@ -67,12 +53,12 @@ class Trie(FSA):
         assert word is not None, "Input word cannot be None"
 
         node = self.root
-        for i in range(0, len(word)):
-            letter = word[i]
+        for i, letter in enumerate(word):
             if letter not in node.children:
                 self._id += 1
                 node.add_child(letter, _id=self._id)
             node = node[letter]
             if i == len(word)-1:
                 node.eow = True
-                self._num_of_words += 1
+                node.count += count
+                self._num_of_words += count

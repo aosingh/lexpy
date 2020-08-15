@@ -79,7 +79,7 @@ class TesDAWGWordInsert(unittest.TestCase):
 
     def test_word_add_all_with_number(self):
         self.dawg = DAWG()
-        self.dawg.add_all(('axe', 'kick', 3)) #tuple with one integer.
+        self.dawg.add_all(('axe', 'kick')) #tuple with one integer.
         self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('axe' in self.dawg, "Word should be in dawg")
@@ -121,19 +121,20 @@ class TestDAWGNodeCount(unittest.TestCase):
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
         self.assertEqual(2, self.dawg.get_word_count(), "Word count not equal")
-        self.assertEqual(7, len(self.dawg), "Number of nodes")
+        self.assertEqual(6, len(self.dawg), "Number of nodes")
 
     def test_dawg_reduced_node_count(self):
         self.dawg = DAWG()
         self.dawg.add_all(["tap", "taps", "top", "tops"])
         self.dawg.reduce()
-        self.assertEqual(5, len(self.dawg), "Number of nodes")
+        self.assertEqual(6, len(self.dawg), "Number of nodes")
 
 
 class TestDAWGPrefixExists(unittest.TestCase):
     def test_dawg_node_prefix_exists(self):
         self.dawg = DAWG()
         self.dawg.add_all(['ash', 'ashley'])
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
@@ -146,6 +147,7 @@ class TestDAWGPrefixExists(unittest.TestCase):
     def test_dawg_node_prefix_not_exists(self):
         self.dawg = DAWG()
         self.dawg.add_all(['ash', 'ashley'])
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
@@ -158,7 +160,8 @@ class TestDAWGPrefixExists(unittest.TestCase):
 class TestDAWGPrefixSearch(unittest.TestCase):
     def test_dawg_prefix_search(self):
         self.dawg = DAWG()
-        self.dawg.add_all(['ashlame', 'ashley', 'askoiu', 'ashlo'])
+        self.dawg.add_all(['ashlame', 'ashley', 'ashlo', 'askoiu'])
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertFalse('ash' in self.dawg, "Word should not be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
@@ -172,6 +175,7 @@ class TestWildCardSearch(unittest.TestCase):
     def test_dawg_asterisk_search(self):
         self.dawg = DAWG()
         self.dawg.add_all(['ash', 'ashley'])
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
@@ -180,6 +184,7 @@ class TestWildCardSearch(unittest.TestCase):
     def test_dawg_question_search(self):
         self.dawg = DAWG()
         self.dawg.add_all(['ab', 'as', 'ash', 'ashley'])
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
@@ -188,6 +193,7 @@ class TestWildCardSearch(unittest.TestCase):
     def test_dawg_wildcard_search(self):
         self.dawg = DAWG()
         self.dawg.add_all(['ab', 'as', 'ash', 'ashley'])
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
@@ -197,6 +203,7 @@ class TestWildCardSearch(unittest.TestCase):
     def test_dawg_wildcard_exception(self):
         self.dawg = DAWG()
         self.dawg.add_all(['ab', 'as', 'ash', 'ashley'])
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
@@ -206,6 +213,7 @@ class TestWildCardSearch(unittest.TestCase):
 class TestBuildFromFile(unittest.TestCase):
     def test_dawg_build_from_file_path(self):
         self.dawg = build_dawg_from_file(small_dataset)
+        self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ZYGOMORPHIES' in self.dawg, "Word should be in dawg")
         self.assertTrue('ZYGOMATA' in self.dawg, "Word should be in dawg")
@@ -215,11 +223,26 @@ class TestBuildFromFile(unittest.TestCase):
     def test_dawg_build_from_file_object(self):
         with open(small_dataset, 'r') as input_file:
             self.dawg = build_dawg_from_file(input_file)
+            self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ZYGOMORPHIES' in self.dawg, "Word should be in dawg")
         self.assertTrue('ZYGOMATA' in self.dawg, "Word should be in dawg")
         self.assertTrue('ZYGOMORPHY' in self.dawg, "Word should be in dawg")
         self.assertEqual(178691, self.dawg.get_word_count(), "Word count not equal")
+
+
+class TestSearchWithinDistance(unittest.TestCase):
+
+    def test_edit_distance_search(self):
+        self.dawg = DAWG()
+        input_words = ['abhor', 'abuzz', 'accept', 'acorn', 'agony', 'albay', 'albin', 'algin', 'alisa', 'almug',
+                       'altai', 'amato', 'ampyx', 'aneto', 'arbil', 'arrow', 'artha', 'aruba', 'athie', 'auric',
+                       'aurum', 'cap', 'common', 'dime', 'eyes', 'foot', 'likeablelanguage', 'lonely', 'look',
+                       'nasty', 'pet', 'psychotic', 'quilt', 'shock', 'smalldusty', 'sore', 'steel', 'suit',
+                       'tank', 'thrill']
+        self.dawg.add_all(input_words)
+        self.dawg.reduce()
+        self.assertListEqual(self.dawg.search_within_distance('arie', dist=2), ['arbil', 'athie', 'auric'])
 
 
 

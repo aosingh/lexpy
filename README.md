@@ -7,22 +7,44 @@
 [![Coverage Status](https://coveralls.io/repos/github/aosingh/lexpy/badge.svg?branch=master)](https://coveralls.io/github/aosingh/lexpy?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/60626f81c0db0c5d8dcd/maintainability)](https://codeclimate.com/github/aosingh/lexpy/maintainability)
 
-[![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/downloads/release/python-270/)
-[![Python 3.5](https://img.shields.io/badge/python-3.5-blue.svg)](https://www.python.org/downloads/release/python-350/)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 
 
->A lexicon is a data-structure which stores a set of words. The difference between 
-a dictionary and a lexicon is that in a lexicon there are no values associated with the words. A lexicon is similar to a list of words or a set, but the internal representation is different and optimized
-for faster searches(of words, prefixes and wildcard patterns). Precisely the search time is O(W) where W is the length of the word. 
+- A lexicon is a data-structure which stores a set of words. The difference between 
+a dictionary and a lexicon is that in a lexicon there are **no values** associated with the words. 
 
-2 important Lexicon data-structures are:
-1. Trie.
-3. Directed Acyclic Word Graph(DAWG).
+- A lexicon is similar to a list of words or a set, but the internal representation is different and optimized
+for faster searches of words, prefixes and wildcard patterns. 
+
+- Precisely the search time is O(W) where W is the length of the word. 
+
+- 2 important lexicon data-structures are:
+
+    - Trie.
+    - Directed Acyclic Word Graph(DAWG).
 
 Both Trie and DAWG are Finite State Automaton(FSA)
+
+# Summary of changes in the current version
+
+- Removed support for Python 2. Going forward only Python 3 will be supported.
+
+- Support for word counts.
+    - `add(word, count=4000)`
+    - `add_all([word]*1000)`
+    - `search(pattern, with_count=True)`
+
+- Changes in DAWG minimization to support the word count feature. 
+    - Only nodes with edges are considered for minimization
+    - Each node's hash also takes into account the `count` flag of the node to determine if 2 nodes are 
+    logically equivalent.
+
+- Minor performance tweaks
+
+- Improved test coverage
+
 
 # Install
 ```commandline
@@ -33,56 +55,46 @@ pip install lexpy
 
 | **Interface Description**                                                                                                     	| **Trie** method                           	| **DAWG** method                           	|
 |-------------------------------------------------------------------------------------------------------------------------------	|-------------------------------------------	|-------------------------------------------	|
-| Add a single word                                                                                                             	| `add('apple')`                            	| `add('apple')`                            	|
+| Add a single word                                                                                                             	| `add('apple', count=2)`                            	| `add('apple', count=2)`                            	|
 | Add multiple words                                                                                                            	| `add_all(['advantage', 'courage'])`       	| `add_all(['advantage', 'courage'])`       	|
 | Check if exists?                                                                                                              	| `in` operator                             	| `in` operator                             	|
-| Search using wildcard expression                                                                                              	| `search('a?b*')`                          	| `search('a?b*)`                           	|
-| Search for prefix matches                                                                                                     	| `search_with_prefix('bar')`               	| `search_with_prefix('bar')`               	|
-| Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance (LD) 	| `search_within_distance('apble', dist=1)` 	| `search_within_distance('apble', dist=1)` 	|
+| Search using wildcard expression                                                                                              	| `search('a?b*', with_count=True)`             | `search('a?b*, with_count=True)`              |
+| Search for prefix matches                                                                                                     	| `search_with_prefix('bar', with_count=True)`  | `search_with_prefix('bar')`               	|
+| Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance (LD) 	| `search_within_distance('apble', dist=1, with_count=True)` 	| `search_within_distance('apble', dist=1, with_count=True)` 	|
 | Get the number of nodes in the automaton 	| `len(trie)` 	| `len(dawg)` 	|
 
 
 # Examples
 
-Although, the examples below are shown only for trie, they can be used for a DAWG in the same way.
-Both Trie and DAWG support the same set of operations as shown in the above table. However, do read the section on 
-"DAWG".
-
-## Ways to build a Trie or a DAWG.
+## Trie.
 
 1. From an input list, set, or tuple of words.
 
 ```python
 from lexpy.trie import Trie
+
 trie = Trie()
-input_words = [
-    'ampyx', 'abuzz', 'athie', 'amato', 'aneto', 'aruba', 'arrow', 'agony', 'altai', 'alisa',
-    'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin', 'almug', 'artha', 'algin', 'auric',
-    'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit', 'tank', 'common', 'lonely', 'likeable'
-    'language', 'shock', 'look', 'pet', 'dime', 'small' 'dusty', 'accept', 'nasty', 'thrill',
-    'foot', 'steel'
-]
+
+input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'aneto', 'aneto', 'aruba', 
+               'arrow', 'agony', 'altai', 'alisa', 'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin', 
+               'almug', 'artha', 'algin', 'auric', 'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit', 
+               'tank', 'common', 'lonely', 'likeable' 'language', 'shock', 'look', 'pet', 'dime', 'small' 
+               'dusty', 'accept', 'nasty', 'thrill', 'foot', 'steel', 'steel', 'steel', 'steel', 'abuzz']
 
 trie.add_all(input_words) # You can pass any sequence types of a file like object here
 
 print(trie.get_word_count())
-40
+
+>>> 48
 ```
 
-2. Use the `build_trie_from_file()` method
-
-```python
-from lexpy.utils import build_trie_from_file
-trie = build_trie_from_file('/path/to/file')
-
-```
-
-3. From a file-like object.
+2. From a file-like object.
 ```python
 
 from lexpy.trie import Trie
 
 # Either
+trie = Trie()
 trie.add_all('/path/to/file.txt')
 
 # Or
@@ -97,46 +109,87 @@ with open('/path/to/file.txt', 'r') as infile:
 
 ```python
 print('ampyx' in trie)
-True
+
+>>> True
 ```
 
 2. Prefix search
 
 ```python
 print(trie.search_with_prefix('ab'))
-['abhor', 'abuzz']
+
+>>> ['abhor', 'abuzz']
+```
+
+```python
+
+print(trie.search_with_prefix('ab', with_count=True))
+
+>>> [('abuzz', 2), ('abhor', 1)]
+
 ```
 
 3. Wildcard search using `?` and `*`
 
-`?` = 0 or 1 occurance of any character
+`?` = 0 or 1 occurrence of any character
 
-`*` = 0 or more occurance of any character
+`*` = 0 or more occurrence of any character
 
 ```python
 print(trie.search('a*o*'))
-['amato', 'abhor', 'aneto', 'arrow', 'agony', 'acorn']
+
+>>> ['amato', 'abhor', 'aneto', 'arrow', 'agony', 'acorn']
+
+print(trie.search('a*o*', with_count=True))
+
+>>> [('amato', 2), ('abhor', 1), ('aneto', 2), ('arrow', 1), ('agony', 1), ('acorn', 1)]
 
 print(trie.search('su?t'))
-['suit']
+
+>>> ['suit']
+
+print(trie.search('su?t', with_count=True))
+
+>>> [('suit', 1)]
+
 ```
 
-4. Search for similar words using the notion of Levenstien Distance(LD)
+4. Search for similar words using the notion of Levenshtein distance
 
 ```python
 print(trie.search_within_distance('arie', dist=2))
-['athie', 'arbil', 'auric']
+
+>>> ['athie', 'arbil', 'auric']
+
+print(trie.search_within_distance('arie', dist=2, with_count=True))
+
+>>> [('athie', 3), ('arbil', 1), ('auric', 1)]
+
+```
+
+5. Update the word counter
+
+```python
+# Update the count using the `add()` method
+trie.add('athie', count=1000)
+
+print(trie.search_within_distance('arie', dist=2, with_count=True))
+
+>>> [('athie', 1003), ('arbil', 1), ('auric', 1)]
 ```
 
 # Directed Acyclic Word Graph (DAWG)
 
->DAWG supports the same set of operations as a Trie. The difference is the number of nodes in a DAWG is always
-less than or equal to the number of nodes in Trie. They both are Deterministic Finite State Automata. 
-However, DAWG is a minimized version of the Trie DFA.
-In a Trie, prefix redundancy is removed.
-In a DAWG, both prefix and suffix redundancies are removed.
+- DAWG supports the same set of operations as a Trie. The difference is the number of nodes in a DAWG is always
+less than or equal to the number of nodes in Trie. 
 
-In the current implementation of DAWG, the insertion order of the words should be **alphabetical**.
+- They both are Deterministic Finite State Automata. However, DAWG is a minimized version of the Trie DFA.
+
+- In a Trie, prefix redundancy is removed. In a DAWG, both prefix and suffix redundancies are removed.
+
+- In the current implementation of DAWG, the insertion order of the words should be **alphabetical**.
+
+- The implementation idea of DAWG is borrowed from http://stevehanov.ca/blog/?id=115
 
 
 ```python
@@ -155,9 +208,131 @@ len(trie) # Number of Nodes in Trie
 dawg.reduce() # Perform DFA minimization. Call this every time a chunk of words are uploaded in DAWG.
 
 len(dawg) # Number of nodes in DAWG
-16
+21
 
 ```
+
+## DAWG
+
+The APIs are exactly same as the Trie APIs
+
+1. Build a DAWG
+
+```python
+from lexpy.dawg import DAWG
+dawg = DAWG()
+
+input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'aneto', 'aneto', 'aruba', 
+               'arrow', 'agony', 'altai', 'alisa', 'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin', 
+               'almug', 'artha', 'algin', 'auric', 'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit', 
+               'tank', 'common', 'lonely', 'likeable' 'language', 'shock', 'look', 'pet', 'dime', 'small' 
+               'dusty', 'accept', 'nasty', 'thrill', 'foot', 'steel', 'steel', 'steel', 'steel', 'abuzz']
+
+
+dawg.add_all(input_words)
+dawg.reduce()
+
+dawg.get_word_count()
+48
+
+```
+
+## Search
+
+1. Check if exists using the `in` operator
+
+```python
+print('ampyx' in dawg)
+
+>>> True
+```
+
+2. Prefix search
+
+```python
+print(dawg.search_with_prefix('ab'))
+
+>>> ['abhor', 'abuzz']
+```
+
+```python
+
+print(dawg.search_with_prefix('ab', with_count=True))
+
+>>> [('abuzz', 2), ('abhor', 1)]
+
+```
+
+3. Wildcard search using `?` and `*`
+
+`?` = 0 or 1 occurance of any character
+
+`*` = 0 or more occurance of any character
+
+```python
+print(dawg.search('a*o*'))
+
+>>> ['amato', 'abhor', 'aneto', 'arrow', 'agony', 'acorn']
+
+print(dawg.search('a*o*', with_count=True))
+
+>>> [('amato', 2), ('abhor', 1), ('aneto', 2), ('arrow', 1), ('agony', 1), ('acorn', 1)]
+
+print(dawg.search('su?t'))
+
+>>> ['suit']
+
+print(dawg.search('su?t', with_count=True))
+
+>>> [('suit', 1)]
+
+```
+
+4. Search for similar words using the notion of Levenstien Distance(LD)
+
+```python
+print(dawg.search_within_distance('arie', dist=2))
+
+>>> ['athie', 'arbil', 'auric']
+
+print(dawg.search_within_distance('arie', dist=2, with_count=True))
+
+>>> [('athie', 3), ('arbil', 1), ('auric', 1)]
+
+```
+
+5. Alphabetical order insertion
+
+If you insert a word which is out-of-order, ``ValueError`` will be raised.
+```python
+dawg.add('athie', count=1000)
+```
+ValueError
+
+```text
+ValueError: Words should be inserted in Alphabetical order. <Previous word - thrill>, <Current word - athie>
+```
+
+5. Update the word counter for the last inserted word
+
+```python
+
+# Update the count using the add_all() method
+
+dawg.add_all(['thrill']*20000)
+
+print(dawg.search('thrill', with_count=True))
+
+>> [('thrill', 20001)]
+
+```
+
+## Trie vs DAWG
+
+![Number of nodes comparison](/lexpy_trie_dawg_nodes.png)
+
+![Build time comparison](/lexpy_trie_dawg_time.png)
+
 
 
 *Fun Facts* :
