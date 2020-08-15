@@ -104,8 +104,6 @@ with open('/path/to/file.txt', 'r') as infile:
 
 ```
 
-## Search
-
 ### Check if exists using the `in` operator
 
 ```python
@@ -168,10 +166,12 @@ print(trie.search_within_distance('arie', dist=2, with_count=True))
 
 ```
 
-### Update the word counter
+### Increment word count
+
+- You can either add a new word or increment the counter for an existing word.
 
 ```python
-# Update the count using the `add()` method
+
 trie.add('athie', count=1000)
 
 print(trie.search_within_distance('arie', dist=2, with_count=True))
@@ -234,11 +234,10 @@ dawg.add_all(input_words)
 dawg.reduce()
 
 dawg.get_word_count()
-48
+
+>>> 48
 
 ```
-
-## Search
 
 ### Check if exists using the `in` operator
 
@@ -314,13 +313,14 @@ ValueError
 ValueError: Words should be inserted in Alphabetical order. <Previous word - thrill>, <Current word - athie>
 ```
 
-### Specify a word count
+### Increment the word count
+
+- You can either add an alphabetically greater word with a specific count or increment the count of the previous added word.
 
 ```python
 
-# Update the count using the add_all() method
 
-dawg.add_all(['thrill']*20000)
+dawg.add_all(['thrill']*20000) # or dawg.add('thrill', count=20000)
 
 print(dawg.search('thrill', with_count=True))
 
@@ -329,6 +329,7 @@ print(dawg.search('thrill', with_count=True))
 ```
 
 ## Trie vs DAWG
+
 
 ![Number of nodes comparison](/lexpy_trie_dawg_nodes.png)
 
