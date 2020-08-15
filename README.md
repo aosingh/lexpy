@@ -60,15 +60,15 @@ pip install lexpy
 | Check if exists?                                                                                                              	| `in` operator                             	| `in` operator                             	|
 | Search using wildcard expression                                                                                              	| `search('a?b*', with_count=True)`             | `search('a?b*, with_count=True)`              |
 | Search for prefix matches                                                                                                     	| `search_with_prefix('bar', with_count=True)`  | `search_with_prefix('bar')`               	|
-| Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance (LD) 	| `search_within_distance('apble', dist=1, with_count=True)` 	| `search_within_distance('apble', dist=1, with_count=True)` 	|
+| Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance 	| `search_within_distance('apble', dist=1, with_count=True)` 	| `search_within_distance('apble', dist=1, with_count=True)` 	|
 | Get the number of nodes in the automaton 	| `len(trie)` 	| `len(dawg)` 	|
 
 
 # Examples
 
-## Trie.
+## Trie
 
-1. From an input list, set, or tuple of words.
+### Build from an input list, set, or tuple of words.
 
 ```python
 from lexpy.trie import Trie
@@ -88,7 +88,8 @@ print(trie.get_word_count())
 >>> 48
 ```
 
-2. From a file-like object.
+### Build from a file or file path.
+
 ```python
 
 from lexpy.trie import Trie
@@ -105,7 +106,7 @@ with open('/path/to/file.txt', 'r') as infile:
 
 ## Search
 
-1. Check if exists using the `in` operator
+### Check if exists using the `in` operator
 
 ```python
 print('ampyx' in trie)
@@ -113,7 +114,7 @@ print('ampyx' in trie)
 >>> True
 ```
 
-2. Prefix search
+### Prefix search
 
 ```python
 print(trie.search_with_prefix('ab'))
@@ -129,11 +130,11 @@ print(trie.search_with_prefix('ab', with_count=True))
 
 ```
 
-3. Wildcard search using `?` and `*`
+### Wildcard search using `?` and `*`
 
-`?` = 0 or 1 occurrence of any character
+- `?` = 0 or 1 occurrence of any character
 
-`*` = 0 or more occurrence of any character
+- `*` = 0 or more occurrence of any character
 
 ```python
 print(trie.search('a*o*'))
@@ -154,7 +155,7 @@ print(trie.search('su?t', with_count=True))
 
 ```
 
-4. Search for similar words using the notion of Levenshtein distance
+### Search for similar words using the notion of Levenshtein distance
 
 ```python
 print(trie.search_within_distance('arie', dist=2))
@@ -167,7 +168,7 @@ print(trie.search_within_distance('arie', dist=2, with_count=True))
 
 ```
 
-5. Update the word counter
+### Update the word counter
 
 ```python
 # Update the count using the `add()` method
@@ -216,7 +217,7 @@ len(dawg) # Number of nodes in DAWG
 
 The APIs are exactly same as the Trie APIs
 
-1. Build a DAWG
+### Build a DAWG
 
 ```python
 from lexpy.dawg import DAWG
@@ -239,7 +240,7 @@ dawg.get_word_count()
 
 ## Search
 
-1. Check if exists using the `in` operator
+### Check if exists using the `in` operator
 
 ```python
 print('ampyx' in dawg)
@@ -247,7 +248,7 @@ print('ampyx' in dawg)
 >>> True
 ```
 
-2. Prefix search
+### Prefix search
 
 ```python
 print(dawg.search_with_prefix('ab'))
@@ -263,7 +264,7 @@ print(dawg.search_with_prefix('ab', with_count=True))
 
 ```
 
-3. Wildcard search using `?` and `*`
+### Wildcard search using `?` and `*`
 
 `?` = 0 or 1 occurance of any character
 
@@ -288,7 +289,7 @@ print(dawg.search('su?t', with_count=True))
 
 ```
 
-4. Search for similar words using the notion of Levenstien Distance(LD)
+### Search for similar words using the notion of Levenshtein distance
 
 ```python
 print(dawg.search_within_distance('arie', dist=2))
@@ -301,7 +302,7 @@ print(dawg.search_within_distance('arie', dist=2, with_count=True))
 
 ```
 
-5. Alphabetical order insertion
+### Alphabetical order insertion
 
 If you insert a word which is out-of-order, ``ValueError`` will be raised.
 ```python
@@ -313,7 +314,7 @@ ValueError
 ValueError: Words should be inserted in Alphabetical order. <Previous word - thrill>, <Current word - athie>
 ```
 
-5. Update the word counter for the last inserted word
+### Specify a word count
 
 ```python
 
