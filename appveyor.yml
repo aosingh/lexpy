@@ -56,8 +56,8 @@ install:
 
   # Install the build dependencies of the project.
   # - "%CMD_IN_ENV% pip install -r requirements.txt"
-  - cmd: pip install coverage
-  - cmd: pip install nose
+  - cmd: python -m pip install coverage
+  - cmd: python -m pip install nose
 
 
 build_script:
@@ -65,4 +65,5 @@ build_script:
 
 test_script:
   # Run the project tests
-  - cmd: python setup.py nosetests"
+  - cmd: python -m coverage run -m unittest discover -s lexpy/tests
+  - cmd: python -m coverage report -i -m
