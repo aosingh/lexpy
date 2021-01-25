@@ -33,10 +33,15 @@ class TestTrieExactWordSearch(unittest.TestCase):
         self.trie.add_all(['ash', 'ashley'])
         self.assertTrue('ash' in self.trie, "Word should be in trie")
 
-    def test_word_not_int_trie(self):
+    def test_word_not_int_trie1(self):
         self.trie = Trie()
         self.trie.add_all(['ash', 'ashley'])
         self.assertFalse('salary' in self.trie, "Word should not be in trie")
+
+    def test_word_not_int_trie2(self):
+        self.trie = Trie()
+        self.trie.add_all(['ash', 'ashley'])
+        self.assertFalse('mash lolley' in self.trie, "Word should not be in trie")
 
 
 class TesTrieWordInsert(unittest.TestCase):
