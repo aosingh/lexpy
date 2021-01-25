@@ -35,11 +35,17 @@ class TestDAWGExactWordSearch(unittest.TestCase):
         self.dawg.reduce()
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
 
-    def test_word_not_int_dawg(self):
+    def test_word_not_int_dawg1(self):
         self.dawg = DAWG()
         self.dawg.add_all(['ash', 'ashley'])
         self.dawg.reduce()
         self.assertFalse('salary' in self.dawg, "Word should not be in dawg")
+    
+    def test_word_not_int_dawg2(self):
+        self.dawg = DAWG()
+        self.dawg.add_all(['ash', 'ashley'])
+        self.dawg.reduce()
+        self.assertFalse('mash lolley' in self.dawg, "Word should not be in dawg")
 
 class TesDAWGWordInsert(unittest.TestCase):
 

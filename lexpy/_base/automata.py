@@ -40,6 +40,8 @@ class FSA:
                 node = node[letter]
                 if node.eow and i == len(word) - 1:
                     return True
+            else:
+                return False
         return False
 
     def __contains_prefix(self, prefix):
