@@ -1,5 +1,4 @@
-![Lexpy Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
-
+# Lexpy
 
 [![Downloads](https://pepy.tech/badge/lexpy)](https://pepy.tech/project/lexpy)
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
