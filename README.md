@@ -1,4 +1,4 @@
-![lexpy logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
+# lexpy
 
 [![Downloads](https://pepy.tech/badge/lexpy)](https://pepy.tech/project/lexpy)
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
@@ -10,6 +10,7 @@
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
 
 - A lexicon is a data-structure which stores a set of words. The difference between 
@@ -18,7 +19,7 @@ a dictionary and a lexicon is that in a lexicon there are **no values** associat
 - A lexicon is similar to a list of words or a set, but the internal representation is different and optimized
 for faster searches of words, prefixes and wildcard patterns. 
 
-- Precisely the search time is O(W) where W is the length of the word. 
+- Given a word, precisely the search time is O(W) where W is the length of the word. 
 
 - 2 important lexicon data-structures are:
 
@@ -27,29 +28,18 @@ for faster searches of words, prefixes and wildcard patterns.
 
 Both Trie and DAWG are Finite State Automaton(FSA)
 
-# Summary of changes in the current version
-
-- Removed support for Python 2. Going forward only Python 3 will be supported.
-
-- Support for word counts.
-    - `add(word, count=4000)`
-    - `add_all([word]*1000)`
-    - `search(pattern, with_count=True)`
-
-- Changes in DAWG minimization to support the word count feature. 
-    - Only nodes with edges are considered for minimization
-    - Each node's hash also takes into account the `count` flag of the node to determine if 2 nodes are 
-    logically equivalent.
-
-- Minor performance tweaks
-
-- Improved test coverage
-
 
 # Install
 ```commandline
 pip install lexpy
 ```
+## Supported OS
+- Linux
+- Windows
+
+## Supported Python Platforms
+- CPython 3.6, 3.7, 3.8, 3.9
+- PyPy3
 
 # Interface
 

@@ -13,3 +13,4 @@ build
 dawg_sample.py
 compare_trie_dawg_size.py
 compare_trie_dawg_time.py
+venv
