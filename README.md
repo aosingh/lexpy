@@ -1,4 +1,5 @@
-# lexpy
+![Lexpy Logo](https://github.com/aosingh/lexpy/blob/master/images/lexpylogo.png)
+
 
 [![Downloads](https://pepy.tech/badge/lexpy)](https://pepy.tech/project/lexpy)
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
@@ -342,7 +343,7 @@ These are some ideas which I would love to work on next in that order. Pull requ
 - Server (TCP or HTTP) to serve queries over the network.
 
 
-*Fun Facts* :
+# Fun Facts
 1. The 45-letter word pneumonoultramicroscopicsilicovolcanoconiosis is the longest English word that appears in a major dictionary.
 So for all english words, the search time is bounded by O(45). 
 2. The longest technical word(not in dictionary) is the name of a protein called as [titin](https://en.wikipedia.org/wiki/Titin). It has 189,819
