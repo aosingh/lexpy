@@ -11,6 +11,8 @@
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
+[![PyPy3](https://img.shields.io/badge/python-PyPy3-blue.svg)](https://www.pypy.org/index.html)
+
 
 
 - A lexicon is a data-structure which stores a set of words. The difference between 
@@ -24,9 +26,9 @@ for faster searches of words, prefixes and wildcard patterns.
 - 2 important lexicon data-structures are:
 
     - Trie.
-    - Directed Acyclic Word Graph(DAWG).
+    - Directed Acyclic Word Graph (DAWG).
 
-Both Trie and DAWG are Finite State Automaton(FSA)
+Both Trie and DAWG are Finite State Automaton (FSA)
 
 
 # Install
@@ -79,6 +81,8 @@ print(trie.get_word_count())
 ```
 
 ### Build from a file or file path.
+
+In the file, words should be newline separated.
 
 ```python
 
@@ -293,7 +297,7 @@ print(dawg.search_within_distance('arie', dist=2, with_count=True))
 
 ### Alphabetical order insertion
 
-If you insert a word which is out-of-order, ``ValueError`` will be raised.
+If you insert a word which is lexicographically out-of-order, ``ValueError`` will be raised.
 ```python
 dawg.add('athie', count=1000)
 ```
@@ -321,10 +325,21 @@ print(dawg.search('thrill', with_count=True))
 ## Trie vs DAWG
 
 
-![Number of nodes comparison](/lexpy_trie_dawg_nodes.png)
+![Number of nodes comparison](https://github.com/aosingh/lexpy/blob/master/lexpy_trie_dawg_nodes.png)
 
-![Build time comparison](/lexpy_trie_dawg_time.png)
+![Build time comparison](https://github.com/aosingh/lexpy/blob/master/lexpy_trie_dawg_time.png)
 
+
+
+# Future Work
+
+These are some ideas which I would love to work on next in that order. Pull requests or discussions are invited.
+
+- Merge trie and DAWG features in one data structure
+  -  Support all functionalities and still be as compressed as possible.
+- Serialization / Deserialization
+    - Pickle is definitely an option. 
+- Server (TCP or HTTP) to serve queries over the network.
 
 
 *Fun Facts* :
@@ -332,10 +347,6 @@ print(dawg.search('thrill', with_count=True))
 So for all english words, the search time is bounded by O(45). 
 2. The longest technical word(not in dictionary) is the name of a protein called as [titin](https://en.wikipedia.org/wiki/Titin). It has 189,819
 letters and it is disputed whether it is a word.
-
-
-
-
 
 
 
