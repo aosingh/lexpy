@@ -317,9 +317,9 @@ print(dawg.search('thrill', with_count=True))
 ## Trie vs DAWG
 
 
-![Number of nodes comparison](https://github.com/aosingh/lexpy/blob/master/lexpy_trie_dawg_nodes.png)
+![Number of nodes comparison](https://github.com/aosingh/lexpy/blob/main/lexpy_trie_dawg_nodes.png)
 
-![Build time comparison](https://github.com/aosingh/lexpy/blob/master/lexpy_trie_dawg_time.png)
+![Build time comparison](https://github.com/aosingh/lexpy/blob/main/lexpy_trie_dawg_time.png)
 
 
 
