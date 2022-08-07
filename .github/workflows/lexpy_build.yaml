@@ -29,5 +29,4 @@ jobs:
     - name: Run Unittests
       run: |
         coverage run -m unittest discover -s lexpy/tests
-        coverage combine
         coverage report -m
