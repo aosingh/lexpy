@@ -26,7 +26,6 @@ class Trie(FSA):
         root = FSANode(0, '')
         super(Trie, self).__init__(root)
 
-
     def __len__(self):
         """
         Description:

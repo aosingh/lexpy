@@ -188,7 +188,6 @@ class FSA:
             present, node = self.__contains_prefix(wildcard)
             if present and node.eow:
                 words.append((wildcard, node.count)) if with_count else words.append(wildcard)
-                #words.append(wildcard)
             return words
 
         return FSA.__words_with_wildcard(self.root, wildcard, 0, self.root.val, with_count=with_count)
