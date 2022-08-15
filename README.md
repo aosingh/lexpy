@@ -22,13 +22,7 @@ for faster searches of words, prefixes and wildcard patterns.
 
 - Given a word, precisely the search time is O(W) where W is the length of the word. 
 
-- 2 important lexicon data-structures are:
-
-    - Trie.
-    - Directed Acyclic Word Graph (DAWG).
-
-Both Trie and DAWG are Finite State Automaton (FSA)
-
+- 2 important lexicon data-structures are **_Trie_** and **_Directed Acyclic Word Graph (DAWG)_**.
 
 # Install
 ```commandline
