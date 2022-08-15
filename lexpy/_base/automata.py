@@ -1,9 +1,6 @@
 import os
 
-from types import GeneratorType
-
 from lexpy._utils import validate_expression, gen_source
-from lexpy.exceptions import InvalidWildCardExpressionError
 
 
 class FSA:
@@ -84,7 +81,6 @@ class FSA:
         """
         contains, _ = self.__contains_prefix(prefix)
         return contains
-
 
     @staticmethod
     def __words_with_wildcard(node, wildcard, index, current_word="", with_count=False):
@@ -173,24 +169,14 @@ class FSA:
             :returns words(list): Returns the list of words where the wildcard pattern matches.
 
         """
-        words = []
-        if wildcard is None:
-            raise ValueError("Search pattern cannot be None")
-
-        if wildcard == '':
-            return words
-        try:
-            wildcard = validate_expression(wildcard)
-        except InvalidWildCardExpressionError:
-            raise
-
-        if wildcard.isalpha():
-            present, node = self.__contains_prefix(wildcard)
-            if present and node.eow:
-                words.append((wildcard, node.count)) if with_count else words.append(wildcard)
-            return words
-
-        return FSA.__words_with_wildcard(self.root, wildcard, 0, self.root.val, with_count=with_count)
+        if not wildcard:
+            return []
+        wildcard = validate_expression(wildcard)
+        return FSA.__words_with_wildcard(self.root,
+                                         wildcard,
+                                         0,
+                                         self.root.val,
+                                         with_count=with_count)
 
     def search_with_prefix(self, prefix, with_count=False):
         """
@@ -230,13 +216,6 @@ class FSA:
             None
 
         """
-        if isinstance(source, (GeneratorType, str, list, tuple, set)):
-            pass
-        elif hasattr(source, 'read'):
-            pass
-        else:
-            raise ValueError("Source type {0} not supported ".format(type(source)))
-
         if isinstance(source, str) and not os.path.exists(source):
             raise IOError("File does not exists")
 
@@ -244,8 +223,7 @@ class FSA:
             source = gen_source(source)
 
         for word in source:
-            if type(word) == str:
-                self.add(word)
+            self.add(word)
 
     def get_word_count(self):
         """
@@ -287,13 +265,3 @@ class FSA:
                                              child_node, new_word+child_node,
                                              words, curr_row, dist,
                                              with_count=with_count)
-
-
-
-
-
-
-
-
-
-

@@ -8,7 +8,6 @@ with open(path.join(this_directory, 'README.md')) as f:
 
 
 DISTNAME = 'lexpy'
-
 AUTHOR = 'Abhishek Singh'
 MAINTAINER = 'Abhishek Singh'
 MAINTAINER_EMAIL = 'abhishek.singh20141@gmail.com'

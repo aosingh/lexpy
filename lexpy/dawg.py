@@ -31,7 +31,8 @@ class DAWG(FSA):
             # find common prefix between word and previous word
             common_prefix_index = 0
             for i, letters in enumerate(zip(word, self.__prev_word), start=1):
-                if letters[0] != letters[1]: break
+                if letters[0] != letters[1]:
+                    break
                 common_prefix_index = i
 
             self._reduce(common_prefix_index)

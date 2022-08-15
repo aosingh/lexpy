@@ -49,7 +49,8 @@ class Trie(FSA):
             :raises: ``AssertionError`` if the word is None
 
         """
-        assert word is not None, "Input word cannot be None"
+        if word is None:
+            raise ValueError("Input word cannot be None")
 
         node = self.root
         for i, letter in enumerate(word):

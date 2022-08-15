@@ -3,7 +3,6 @@ import os
 
 from lexpy.trie import Trie
 from lexpy.utils import build_trie_from_file
-from lexpy.exceptions import InvalidWildCardExpressionError
 
 
 HERE = os.path.dirname(__file__)
@@ -52,10 +51,9 @@ class TesTrieWordInsert(unittest.TestCase):
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('axe' in self.trie, "Word should be in trie")
 
-
     def test_word_add_all_list(self):
         self.trie = Trie()
-        self.trie.add_all(['axe', 'kick']) #list
+        self.trie.add_all(['axe', 'kick'])  # list
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('axe' in self.trie, "Word should be in trie")
         self.assertTrue('kick' in self.trie, "Word should be in trie")
@@ -63,7 +61,7 @@ class TesTrieWordInsert(unittest.TestCase):
 
     def test_word_add_all_set(self):
         self.trie = Trie()
-        self.trie.add_all({'axe', 'kick'}) #set
+        self.trie.add_all({'axe', 'kick'})  # set
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('axe' in self.trie, "Word should be in trie")
         self.assertTrue('kick' in self.trie, "Word should be in trie")
@@ -71,7 +69,7 @@ class TesTrieWordInsert(unittest.TestCase):
 
     def test_word_add_all_tuple(self):
         self.trie = Trie()
-        self.trie.add_all(('axe', 'kick')) #tuple
+        self.trie.add_all(('axe', 'kick'))  # tuple
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('axe' in self.trie, "Word should be in trie")
         self.assertTrue('kick' in self.trie, "Word should be in trie")
@@ -79,7 +77,7 @@ class TesTrieWordInsert(unittest.TestCase):
 
     def test_word_add_all_with_number(self):
         self.trie = Trie()
-        self.trie.add_all(('axe', 'kick', 3)) #tuple with one integer.
+        self.trie.add_all(('axe', 'kick'))  # tuple with one integer.
         self.assertIsInstance(self.trie, Trie, "Object should be of type `lexpy.trie.Trie`")
         self.assertTrue('axe' in self.trie, "Word should be in trie")
         self.assertTrue('kick' in self.trie, "Word should be in trie")
@@ -168,6 +166,9 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertTrue('ash' in self.trie, "Word should be in trie")
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
         self.assertEqual(sorted(self.trie.search('a*')), sorted(['ash', 'ashley']), 'The lists should be equal')
+        self.assertEqual(sorted(self.trie.search('a?*')), sorted(['ash', 'ashley']), 'The lists should be equal')
+        self.assertEqual(sorted(self.trie.search('a*?')), sorted(['ash', 'ashley']), 'The lists should be equal')
+        self.assertEqual(sorted(self.trie.search('a***')), sorted(['ash', 'ashley']), 'The lists should be equal')
 
     def test_trie_question_search(self):
         self.trie = Trie()
@@ -192,8 +193,6 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertTrue('ash' in self.trie, "Word should be in trie")
         self.assertTrue('ashley' in self.trie, "Word should be in trie")
         self.assertTrue('#$%^a' in self.trie)
-
-        # self.assertRaises(InvalidWildCardExpressionError, self.trie.search, '#$%^a')
 
 
 class TestBuildFromFile(unittest.TestCase):

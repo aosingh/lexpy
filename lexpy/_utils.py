@@ -3,6 +3,9 @@ from contextlib import closing
 
 __all__ = ['validate_expression', 'gen_source']
 
+PATTERN_FOR_WILDCARD_SEARCH = re.compile(r'(?:(\*\?)+|(\?\*)+|\*+)')
+PATTERN_FOR_CONSECUTIVE_QUESTION_MARK = re.compile(r'\?+')
+
 
 def validate_expression(wildcard_expression):
     """
@@ -24,9 +27,11 @@ def validate_expression(wildcard_expression):
         >>> print(validate_expression(sample_expr)) # Outputs 'a*'
 
     """
-    result = re.sub(r'\*+', '*', wildcard_expression)  # Replace consecutive * with single *
-    result = re.sub(r'\?+', '?', result)  # Replace consecutive ? with a single ?
-    result = re.sub(r'(\*\?)+', '*', result)  # Replace consecutive '*?' with a single group '*'
+    # Replace with single *
+    result = re.sub(PATTERN_FOR_WILDCARD_SEARCH, '*', wildcard_expression)
+
+    # Replace with a single ?
+    result = re.sub(PATTERN_FOR_CONSECUTIVE_QUESTION_MARK, '?', result)
     return result
 
 
