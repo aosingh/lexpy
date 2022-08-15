@@ -1,23 +1,20 @@
 from os import path
+from setuptools import setup, find_packages
 
 this_directory = path.abspath(path.dirname(__file__))
 
 with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
-from setuptools import setup, find_packages
-
-from lexpy import __version__
 
 DISTNAME = 'lexpy'
-
 AUTHOR = 'Abhishek Singh'
 MAINTAINER = 'Abhishek Singh'
-MAINTAINER_EMAIL = 'aosingh@asu.edu'
-DESCRIPTION = ('Python package for lexicon.')
+MAINTAINER_EMAIL = 'abhishek.singh20141@gmail.com'
+DESCRIPTION = 'Python package for lexicon.'
 LICENSE = 'GNU GPLv3'
 URL = 'https://github.com/aosingh/lexpy'
-VERSION = __version__
+VERSION = '1.0.0'
 
 PACKAGES = ['lexpy']
 
@@ -30,9 +27,10 @@ classifiers = [
     'Topic :: Text Processing :: Linguistic',
     'Topic :: Text Processing :: Indexing',
     'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-    'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
     'Operating System :: POSIX :: Linux',
     'Operating System :: Unix',
     'Operating System :: Microsoft :: Windows',

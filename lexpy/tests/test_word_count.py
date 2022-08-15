@@ -3,9 +3,6 @@ import os
 
 from lexpy.trie import Trie
 from lexpy.dawg import DAWG
-from lexpy.utils import build_trie_from_file
-from lexpy.exceptions import InvalidWildCardExpressionError
-
 
 HERE = os.path.dirname(__file__)
 

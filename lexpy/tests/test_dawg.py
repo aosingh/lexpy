@@ -3,7 +3,6 @@ import unittest
 
 from lexpy.dawg import DAWG
 from lexpy.utils import build_dawg_from_file
-from lexpy.exceptions import InvalidWildCardExpressionError
 
 HERE = os.path.dirname(__file__)
 
@@ -46,6 +45,7 @@ class TestDAWGExactWordSearch(unittest.TestCase):
         self.dawg.add_all(['ash', 'ashley'])
         self.dawg.reduce()
         self.assertFalse('mash lolley' in self.dawg, "Word should not be in dawg")
+
 
 class TesDAWGWordInsert(unittest.TestCase):
 
@@ -174,7 +174,7 @@ class TestDAWGPrefixSearch(unittest.TestCase):
         self.assertEqual(4, self.dawg.get_word_count(), "Word count not equal")
         self.assertTrue(self.dawg.contains_prefix('ash'), "Prefix should be present in DAWG")
         self.assertEqual(sorted(self.dawg.search_with_prefix('ash')), sorted(['ashlame', 'ashley', 'ashlo']),
-                              'The lists should be equal')
+                         'The lists should be equal')
 
 
 class TestWildCardSearch(unittest.TestCase):
@@ -186,6 +186,9 @@ class TestWildCardSearch(unittest.TestCase):
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
         self.assertEqual(sorted(self.dawg.search('a*')), sorted(['ash', 'ashley']), 'The lists should be equal')
+        self.assertEqual(sorted(self.dawg.search('a?*')), sorted(['ash', 'ashley']), 'The lists should be equal')
+        self.assertEqual(sorted(self.dawg.search('a*?')), sorted(['ash', 'ashley']), 'The lists should be equal')
+        self.assertEqual(sorted(self.dawg.search('a***')), sorted(['ash', 'ashley']), 'The lists should be equal')
 
     def test_dawg_question_search(self):
         self.dawg = DAWG()
@@ -208,12 +211,13 @@ class TestWildCardSearch(unittest.TestCase):
 
     def test_dawg_wildcard_exception(self):
         self.dawg = DAWG()
-        self.dawg.add_all(['ab', 'as', 'ash', 'ashley'])
+        self.dawg.add_all(['ab', 'as', 'ash', 'ashley', '#$%^a'])
         self.dawg.reduce()
         self.assertIsInstance(self.dawg, DAWG, "Object should be of type `lexpy.dawg.DAWG`")
         self.assertTrue('ash' in self.dawg, "Word should be in dawg")
         self.assertTrue('ashley' in self.dawg, "Word should be in dawg")
-        self.assertRaises(InvalidWildCardExpressionError, self.dawg.search, '#$%^a')
+        self.assertTrue('#$%^a' in self.dawg)
+       #  self.assertRaises(InvalidWildCardExpressionError, self.dawg.search, '#$%^a')
 
 
 class TestBuildFromFile(unittest.TestCase):
@@ -249,7 +253,6 @@ class TestSearchWithinDistance(unittest.TestCase):
         self.dawg.add_all(input_words)
         self.dawg.reduce()
         self.assertListEqual(self.dawg.search_within_distance('arie', dist=2), ['arbil', 'athie', 'auric'])
-
 
 
 if __name__ == '__main__':
