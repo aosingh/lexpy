@@ -19,14 +19,11 @@ class DAWG(FSA):
         self.__unchecked_nodes = deque()
 
     def add(self, word, count=1):
-
         if word < self.__prev_word:
-            raise ValueError("Words should be inserted in Alphabetical order"
-                             "<Previous word - %s>, <Current word - %s>" % (self.__prev_word, word))
-
+            raise ValueError(f"Words should be inserted in alphabetical order\n"
+                             f"Previous word was '{self.__prev_word}' and current word is '{word}'")
         elif word == self.__prev_word:
             self.__prev_node.count += count
-
         else:
             # find common prefix between word and previous word
             common_prefix_index = 0

@@ -11,7 +11,7 @@ DISTNAME = 'lexpy'
 AUTHOR = 'Abhishek Singh'
 MAINTAINER = 'Abhishek Singh'
 MAINTAINER_EMAIL = 'abhishek.singh20141@gmail.com'
-DESCRIPTION = 'Python package for lexicon.'
+DESCRIPTION = 'Python package for lexicon'
 LICENSE = 'GNU GPLv3'
 URL = 'https://github.com/aosingh/lexpy'
 VERSION = '1.0.0'
@@ -38,6 +38,12 @@ classifiers = [
 ]
 keywords = 'trie suffix-trees lexicon directed-acyclic-word-graph dawg'
 
+project_urls = {"Documentation" : "https://github.com/aosingh/lexpy",
+                "Source":  "https://github.com/aosingh/lexpy",
+                "Bug Tracker": "https://github.com/aosingh/lexpy/issues",
+                "CI": "https://github.com/aosingh/lexpy/actions",
+                "Release Notes": "https://github.com/aosingh/lexpy/releases",
+                "License": "https://github.com/aosingh/lexpy/blob/main/LICENSE"}
 
 setup(
     name=DISTNAME,
@@ -50,6 +56,7 @@ setup(
     description=DESCRIPTION,
     license=LICENSE,
     url=URL,
+    project_urls=project_urls,
     version=VERSION,
     packages=find_packages(exclude=("tests",)),
     package_dir={'lexpy': 'lexpy'},
