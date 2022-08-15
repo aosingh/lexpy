@@ -31,13 +31,13 @@ pip install lexpy
 
 # Interface
 
-| **Interface Description**                                                                                                     	| **Trie** method                           	| **DAWG** method                           	|
-|-------------------------------------------------------------------------------------------------------------------------------	|-------------------------------------------	|-------------------------------------------	|
+| **Interface Description**                                                                                                     	| **Trie**                           	| **DAWG**                           	|
+|-------------------------------------------------------------------------------------------------------------------------------	|------------------------------------------	|------------------------------------------	|
 | Add a single word                                                                                                             	| `add('apple', count=2)`                            	| `add('apple', count=2)`                            	|
 | Add multiple words                                                                                                            	| `add_all(['advantage', 'courage'])`       	| `add_all(['advantage', 'courage'])`       	|
 | Check if exists?                                                                                                              	| `in` operator                             	| `in` operator                             	|
-| Search using wildcard expression                                                                                              	| `search('a?b*', with_count=True)`             | `search('a?b*, with_count=True)`              |
-| Search for prefix matches                                                                                                     	| `search_with_prefix('bar', with_count=True)`  | `search_with_prefix('bar')`               	|
+| Search using wildcard expression                                                                                              	| `search('a?b*', with_count=True)`            | `search('a?b*, with_count=True)`             |
+| Search for prefix matches                                                                                                     	| `search_with_prefix('bar', with_count=True)` | `search_with_prefix('bar')`               	|
 | Search for similar words within  given edit distance. Here, the notion of edit distance  is same as Levenshtein distance 	| `search_within_distance('apble', dist=1, with_count=True)` 	| `search_within_distance('apble', dist=1, with_count=True)` 	|
 | Get the number of nodes in the automaton 	| `len(trie)` 	| `len(dawg)` 	|
 
