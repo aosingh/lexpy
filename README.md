@@ -17,14 +17,17 @@
 - A lexicon is a data-structure which stores a set of words. The difference between 
 a dictionary and a lexicon is that in a lexicon there are **no values** associated with the words. 
 
-- A lexicon is similar to a list of words or a set, but the internal representation is different and optimized
+- A lexicon is similar to a list or a set of words, but the internal representation is different and optimized
 for faster searches of words, prefixes and wildcard patterns. 
 
-- Given a word, precisely the search time is O(W) where W is the length of the word. 
+- Given a word, precisely, the search time is O(W) where W is the length of the word. 
 
 - 2 important lexicon data-structures are **_Trie_** and **_Directed Acyclic Word Graph (DAWG)_**.
 
 # Install
+
+`lexpy` can be installed via Python Package Index `(PyPI)` using `pip`
+
 ```commandline
 pip install lexpy
 ```
