@@ -8,6 +8,7 @@
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+
 [![PyPy3.7](https://img.shields.io/badge/python-PyPy3.7-blue.svg)](https://www.pypy.org/download.html)
 [![PyPy3.8](https://img.shields.io/badge/python-PyPy3.8-blue.svg)](https://www.pypy.org/download.html)
 [![PyPy3.9](https://img.shields.io/badge/python-PyPy3.9-blue.svg)](https://www.pypy.org/download.html)
@@ -26,7 +27,7 @@ for faster searches of words, prefixes and wildcard patterns.
 
 # Install
 
-`lexpy` can be installed via Python Package Index `(PyPI)` using `pip`
+`lexpy` can be installed via Python Package Index `(PyPI)` using `pip`. The only installation requirement is that you need Python 3.7 or higher.
 
 ```commandline
 pip install lexpy
