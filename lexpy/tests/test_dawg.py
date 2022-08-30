@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from lexpy.dawg import DAWG
+from lexpy import DAWG
 from lexpy.utils import build_dawg_from_file
 
 HERE = os.path.dirname(__file__)

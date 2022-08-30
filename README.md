@@ -59,7 +59,7 @@ input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'a
                'tank', 'common', 'lonely', 'likeable' 'language', 'shock', 'look', 'pet', 'dime', 'small' 
                'dusty', 'accept', 'nasty', 'thrill', 'foot', 'steel', 'steel', 'steel', 'steel', 'abuzz']
 
-trie.add_all(input_words) # You can pass any sequence types of a file like object here
+trie.add_all(input_words) # You can pass any sequence types or a file-like object here
 
 print(trie.get_word_count())
 
@@ -72,7 +72,7 @@ In the file, words should be newline separated.
 
 ```python
 
-from lexpy.trie import Trie
+from lexpy import Trie
 
 # Either
 trie = Trie()
@@ -174,8 +174,7 @@ less than or equal to the number of nodes in Trie.
 
 
 ```python
-from lexpy.trie import Trie
-from lexpy.dawg import DAWG
+from lexpy import Trie, DAWG
 
 trie = Trie()
 trie.add_all(['advantageous', 'courageous'])
@@ -200,7 +199,7 @@ The APIs are exactly same as the Trie APIs
 ### Build a DAWG
 
 ```python
-from lexpy.dawg import DAWG
+from lexpy import DAWG
 dawg = DAWG()
 
 input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'aneto', 'aneto', 'aruba', 

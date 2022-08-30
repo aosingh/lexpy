@@ -1,5 +1,3 @@
-from collections import deque
-
 from lexpy._base.node import FSANode
 from lexpy._base.automata import FSA
 
@@ -16,7 +14,7 @@ class DAWG(FSA):
         self.__prev_word = ''
         self.__prev_node = root
         self.__minimized_nodes = {}
-        self.__unchecked_nodes = deque()
+        self.__unchecked_nodes = []
 
     def add(self, word, count=1):
         if word < self.__prev_word:
@@ -59,7 +57,6 @@ class DAWG(FSA):
     def _reduce(self, to):
         for i in reversed(range(to, len(self.__unchecked_nodes))):
             parent, letter, child = self.__unchecked_nodes[i]
-
             # If there are children
             if child.children and child in self.__minimized_nodes:
                 parent.children[letter] = self.__minimized_nodes[child]
@@ -69,17 +66,18 @@ class DAWG(FSA):
             self.__unchecked_nodes.pop()
 
     def add_all(self, source):
+        """Add all words from a Sequence datatype or File like object
+
+        Args:
+            source: Sequence datatype (list, set, tuple) or a file like object
+
+        """
         if isinstance(source, (list, set, tuple)):
             source = sorted(source)
-        FSA.add_all(self, source)
+        super(DAWG, self).add_all(source=source)
 
     def __len__(self):
-        """
-        Description:
-            Returns the number of nodes in the DAWG Data Structure
+        """Returns the number of nodes in DAWG instance
 
-        Returns:
-            :returns (int) Number of Nodes in the dawg data structure
-        :return:
         """
         return len(self.__minimized_nodes)

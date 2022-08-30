@@ -1,8 +1,7 @@
 import unittest
 import os
 
-from lexpy.trie import Trie
-from lexpy.dawg import DAWG
+from lexpy import Trie, DAWG
 
 HERE = os.path.dirname(__file__)
 

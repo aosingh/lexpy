@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from lexpy.trie import Trie
+from lexpy import Trie
 from lexpy.utils import build_trie_from_file
 
 
