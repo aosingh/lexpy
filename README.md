@@ -49,7 +49,7 @@ pip install lexpy
 ### Build from an input list, set, or tuple of words.
 
 ```python
-from lexpy.trie import Trie
+from lexpy import Trie
 
 trie = Trie()
 
