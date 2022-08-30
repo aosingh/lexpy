@@ -307,6 +307,32 @@ print(dawg.search('thrill', with_count=True))
 
 ```
 
+## Special Characters
+
+Special characters, except `?` and `*`, are matched literally. 
+
+```python
+from lexpy import Trie
+t = Trie()
+t.add('a©')
+```
+
+```python
+t.search('a©')
+>> ['a©']
+
+```
+
+```python
+t.search('a?')
+>> ['a©']
+```
+
+```python
+t.search('?©')
+>> ['a©']
+```
+
 ## Trie vs DAWG
 
 
