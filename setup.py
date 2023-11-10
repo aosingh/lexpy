@@ -14,7 +14,7 @@ MAINTAINER_EMAIL = 'abhishek.singh20141@gmail.com'
 DESCRIPTION = 'Python package for lexicon'
 LICENSE = 'GNU GPLv3'
 URL = 'https://github.com/aosingh/lexpy'
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
 PACKAGES = ['lexpy']
 
@@ -31,6 +31,8 @@ classifiers = [
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
     'Operating System :: POSIX :: Linux',
     'Operating System :: Unix',
     'Operating System :: Microsoft :: Windows',
@@ -38,7 +40,7 @@ classifiers = [
 ]
 keywords = 'trie suffix-trees lexicon directed-acyclic-word-graph dawg'
 
-project_urls = {"Documentation" : "https://github.com/aosingh/lexpy",
+project_urls = {"Documentation": "https://github.com/aosingh/lexpy",
                 "Source":  "https://github.com/aosingh/lexpy",
                 "Bug Tracker": "https://github.com/aosingh/lexpy/issues",
                 "CI": "https://github.com/aosingh/lexpy/actions",
