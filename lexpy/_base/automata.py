@@ -19,7 +19,8 @@ class FSA:
     def __contains__(self, word):
         """
         Description:
-            To enable the use of 'in' keyword on dawg. Returns true if the word is present in dawg else false
+            To enable the use of 'in' keyword on dawg.
+            Returns true if the word is present in dawg else false
 
         Args:
             :arg word (str) The word to be searched
