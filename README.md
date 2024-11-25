@@ -19,13 +19,13 @@
 
 
 
-- A lexicon is a data-structure which stores a set of words. The difference between 
-a dictionary and a lexicon is that in a lexicon there are **no values** associated with the words. 
+- A lexicon is a data-structure which stores a set of words. The difference between
+a dictionary and a lexicon is that in a lexicon there are **no values** associated with the words.
 
 - A lexicon is similar to a list or a set of words, but the internal representation is different and optimized
-for faster searches of words, prefixes and wildcard patterns. 
+for faster searches of words, prefixes and wildcard patterns.
 
-- Given a word, precisely, the search time is O(W) where W is the length of the word. 
+- Given a word, precisely, the search time is O(W) where W is the length of the word.
 
 - 2 important lexicon data-structures are **_Trie_** and **_Directed Acyclic Word Graph (DAWG)_**.
 
@@ -61,10 +61,10 @@ from lexpy import Trie
 
 trie = Trie()
 
-input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'aneto', 'aneto', 'aruba', 
-               'arrow', 'agony', 'altai', 'alisa', 'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin', 
-               'almug', 'artha', 'algin', 'auric', 'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit', 
-               'tank', 'common', 'lonely', 'likeable' 'language', 'shock', 'look', 'pet', 'dime', 'small' 
+input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'aneto', 'aneto', 'aruba',
+               'arrow', 'agony', 'altai', 'alisa', 'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin',
+               'almug', 'artha', 'algin', 'auric', 'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit',
+               'tank', 'common', 'lonely', 'likeable' 'language', 'shock', 'look', 'pet', 'dime', 'small'
                'dusty', 'accept', 'nasty', 'thrill', 'foot', 'steel', 'steel', 'steel', 'steel', 'abuzz']
 
 trie.add_all(input_words) # You can pass any sequence types or a file-like object here
@@ -170,7 +170,7 @@ print(trie.search_within_distance('arie', dist=2, with_count=True))
 # Directed Acyclic Word Graph (DAWG)
 
 - DAWG supports the same set of operations as a Trie. The difference is the number of nodes in a DAWG is always
-less than or equal to the number of nodes in Trie. 
+less than or equal to the number of nodes in Trie.
 
 - They both are Deterministic Finite State Automata. However, DAWG is a minimized version of the Trie DFA.
 
@@ -210,10 +210,10 @@ The APIs are exactly same as the Trie APIs
 from lexpy import DAWG
 dawg = DAWG()
 
-input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'aneto', 'aneto', 'aruba', 
-               'arrow', 'agony', 'altai', 'alisa', 'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin', 
-               'almug', 'artha', 'algin', 'auric', 'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit', 
-               'tank', 'common', 'lonely', 'likeable' 'language', 'shock', 'look', 'pet', 'dime', 'small' 
+input_words = ['ampyx', 'abuzz', 'athie', 'athie', 'athie', 'amato', 'amato', 'aneto', 'aneto', 'aruba',
+               'arrow', 'agony', 'altai', 'alisa', 'acorn', 'abhor', 'aurum', 'albay', 'arbil', 'albin',
+               'almug', 'artha', 'algin', 'auric', 'sore', 'quilt', 'psychotic', 'eyes', 'cap', 'suit',
+               'tank', 'common', 'lonely', 'likeable' 'language', 'shock', 'look', 'pet', 'dime', 'small'
                'dusty', 'accept', 'nasty', 'thrill', 'foot', 'steel', 'steel', 'steel', 'steel', 'abuzz']
 
 
@@ -317,7 +317,7 @@ print(dawg.search('thrill', with_count=True))
 
 ## Special Characters
 
-Special characters, except `?` and `*`, are matched literally. 
+Special characters, except `?` and `*`, are matched literally.
 
 ```python
 from lexpy import Trie
@@ -357,15 +357,12 @@ These are some ideas which I would love to work on next in that order. Pull requ
 - Merge trie and DAWG features in one data structure
   -  Support all functionalities and still be as compressed as possible.
 - Serialization / Deserialization
-    - Pickle is definitely an option. 
+    - Pickle is definitely an option.
 - Server (TCP or HTTP) to serve queries over the network.
 
 
 # Fun Facts
 1. The 45-letter word pneumonoultramicroscopicsilicovolcanoconiosis is the longest English word that appears in a major dictionary.
-So for all english words, the search time is bounded by O(45). 
+So for all english words, the search time is bounded by O(45).
 2. The longest technical word(not in dictionary) is the name of a protein called as [titin](https://en.wikipedia.org/wiki/Titin). It has 189,819
 letters and it is disputed whether it is a word.
-
-
-

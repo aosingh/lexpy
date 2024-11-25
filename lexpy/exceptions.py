@@ -9,4 +9,4 @@ class InvalidWildCardExpressionError(LexpyError):
         self.message = message
 
     def __str__(self):
-        return repr(': '.join([self.message, self.expr]))
+        return repr(": ".join([self.message, self.expr]))
