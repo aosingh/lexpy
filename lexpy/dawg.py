@@ -1,25 +1,34 @@
 from lexpy._base.node import FSANode
 from lexpy._base.automata import FSA
 
-__all__ = ['DAWG']
+__all__ = ["DAWG"]
 
 
 class DAWG(FSA):
 
-    __slots__ = 'root', '__prev_word', '__prev_node', '__minimized_nodes', '__unchecked_nodes'
+    __slots__ = (
+        "root",
+        "__prev_word",
+        "__prev_node",
+        "__minimized_nodes",
+        "__unchecked_nodes",
+    )
 
     def __init__(self):
-        root = FSANode(1, '')
+        root = FSANode(1, "")
         super(DAWG, self).__init__(root=root)
-        self.__prev_word = ''
+        self.__prev_word = ""
         self.__prev_node = root
         self.__minimized_nodes = {}
         self.__unchecked_nodes = []
 
     def add(self, word, count=1):
         if word < self.__prev_word:
-            raise ValueError(f"Words should be inserted in alphabetical order\n"
-                             f"Previous word was '{self.__prev_word}' and current word is '{word}'")
+            raise ValueError(
+                f"Words should be inserted in alphabetical order\n"
+                f"Previous word was '{self.__prev_word}' "
+                f"and current word is '{word}'"
+            )
         elif word == self.__prev_word:
             self.__prev_node.count += count
         else:
@@ -77,7 +86,5 @@ class DAWG(FSA):
         super(DAWG, self).add_all(source=source)
 
     def __len__(self):
-        """Returns the number of nodes in DAWG instance
-
-        """
+        """Returns the number of nodes in DAWG instance"""
         return len(self.__minimized_nodes)

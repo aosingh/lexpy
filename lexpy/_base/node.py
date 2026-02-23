@@ -1,11 +1,12 @@
 class FSANode:
     """
-    Class for Finite State Automaton(FSA) Node. Both Trie and Directed Acyclic Word Graph (DAWG) node definitions
+    Class for Finite State Automaton(FSA) Node.
+    Both Trie and Directed Acyclic Word Graph (DAWG) node definitions
     inherit from this class.
 
     """
 
-    __slots__ = 'id', 'val', 'children', 'eow', 'count'
+    __slots__ = "id", "val", "children", "eow", "count"
 
     def __init__(self, _id, val):
         """
@@ -38,8 +39,9 @@ class FSANode:
     def __getitem__(self, letter):
         """
         Description:
-            Returns the child node. To use this method first check if the key is present in the dictionary of children
-            edges or use default as None
+            Returns the child node. To use this method first check if the
+            key is present in the dictionary of children edges or use default
+            as None
 
         Args:
             :arg (str) The letter(or label) corresponding to the child node
@@ -52,7 +54,8 @@ class FSANode:
     def __str__(self):
         """
         Description:
-            Outputs a string representation of the FSA node. This is invoked when str(`FSANode`) is called.
+            Outputs a string representation of the FSA node.
+            This is invoked when str(`FSANode`) is called.
 
         :return:
         """
@@ -91,7 +94,10 @@ class FSANode:
     def __repr__(self):
         """
         Description:
-            Returns a nicely formatted string of the FSA node. This is invoked when `repr()` is called.
+            Returns a nicely formatted string of the FSA node.
+            This is invoked when `repr()` is called.
         :return:
         """
-        return "{0}(id={1}, label={2}, EOW={3}, count={4})".format(self.__class__.__name__, self.id, self.val, self.eow, self.count)
+        return "{0}(id={1}, label={2}, EOW={3}, count={4})".format(
+            self.__class__.__name__, self.id, self.val, self.eow, self.count
+        )
