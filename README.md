@@ -4,19 +4,15 @@
 [![Downloads](https://pepy.tech/badge/lexpy)](https://pepy.tech/project/lexpy)
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
 
-[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
-[![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
-[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
-[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
-[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-31019/)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-31114/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-31212/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/release/python-31312/)
+[![Python 3.14](https://img.shields.io/badge/python-3.14-blue.svg)](https://www.python.org/downloads/release/python-3143/)
 
 
-
-[![PyPy3.7](https://img.shields.io/badge/python-PyPy3.7-blue.svg)](https://www.pypy.org/download.html)
-[![PyPy3.8](https://img.shields.io/badge/python-PyPy3.8-blue.svg)](https://www.pypy.org/download.html)
-[![PyPy3.9](https://img.shields.io/badge/python-PyPy3.9-blue.svg)](https://www.pypy.org/download.html)
-
+[![PyPy3.10](https://img.shields.io/badge/python-PyPy3.10-blue.svg)](https://www.pypy.org/download.html)
+[![PyPy3.11](https://img.shields.io/badge/python-PyPy3.11-blue.svg)](https://www.pypy.org/download.html)
 
 
 - A lexicon is a data-structure which stores a set of words. The difference between
@@ -31,7 +27,7 @@ for faster searches of words, prefixes and wildcard patterns.
 
 # Install
 
-`lexpy` can be installed via Python Package Index `(PyPI)` using `pip`. The only installation requirement is that you need Python 3.7 or higher.
+`lexpy` can be installed via Python Package Index `(PyPI)` using `pip`. The only installation requirement is that you need Python 3.10 or higher. It has no extra dependency requirements.
 
 ```commandline
 pip install lexpy

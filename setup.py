@@ -14,7 +14,7 @@ MAINTAINER_EMAIL = "abhishek.singh20141@gmail.com"
 DESCRIPTION = "Python package for lexicon"
 LICENSE = "GNU GPLv3"
 URL = "https://github.com/aosingh/lexpy"
-VERSION = "1.1.1"
+VERSION = "1.2.0"
 
 PACKAGES = ["lexpy"]
 
@@ -27,13 +27,11 @@ classifiers = [
     "Topic :: Text Processing :: Linguistic",
     "Topic :: Text Processing :: Indexing",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Operating System :: POSIX :: Linux",
     "Operating System :: Unix",
     "Operating System :: Microsoft :: Windows",
