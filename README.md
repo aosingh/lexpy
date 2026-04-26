@@ -1,5 +1,28 @@
 # Lexpy
 
+> ## The successor to this project is [lexrs](https://github.com/aosingh/lexrs)
+>
+> `lexrs` is the Rust-backed rewrite of `lexpy` — same API, 10–100× faster.
+> It is currently under active development and will be published to PyPI soon.
+>
+> Once released, `lexpy 2.0` will become a thin compatibility shim that installs `lexrs`
+> automatically, so existing code using `from lexpy import Trie, DAWG` keeps working.
+> New projects should use `lexrs` directly when it is available.
+>
+> Watch the [lexrs repository](https://github.com/aosingh/lexrs) for the release announcement.
+>
+> **Note for future lexpy 1.x migration** — the module namespaces will change:
+> ```python
+> # lexpy 1.x (current)
+> from lexpy.trie import Trie
+> from lexpy.dawg import DAWG
+>
+> # lexpy 2.x / lexrs (upcoming)
+> from lexrs import Trie, DAWG
+> ```
+
+---
+
 [![lexpy](https://github.com/aosingh/lexpy/actions/workflows/lexpy_build.yaml/badge.svg)](https://github.com/aosingh/lexpy/actions)
 [![Downloads](https://pepy.tech/badge/lexpy)](https://pepy.tech/project/lexpy)
 [![PyPI version](https://badge.fury.io/py/lexpy.svg)](https://pypi.python.org/pypi/lexpy)
