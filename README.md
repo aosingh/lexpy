@@ -19,7 +19,7 @@
 > from lexrs import Trie, DAWG
 > ```
 >
-> See the [lexrs repository](https://github.com/aosingh/lexrs) for full documentation.
+> Full documentation at [aosingh.github.io/lexrs](https://aosingh.github.io/lexrs/).
 
 ---
 
