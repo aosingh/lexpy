@@ -1,25 +1,15 @@
 # Lexpy
 
-> ## The successor to this project is [pylexrs](https://github.com/aosingh/lexrs) — now available on PyPI
+> ## This project has a successor — [lexrs](https://github.com/aosingh/lexrs)
 >
-> `pylexrs` v0.2.0 is the Rust-backed successor to `lexpy` — same API, 10–100× faster insertion and search.
->
-> ```bash
-> pip install pylexrs
-> ```
->
-> New projects should use `pylexrs` directly:
+> **lexrs** is a Rust-native rewrite of lexpy. Same API — up to 100× faster. It goes further too: native Rust usage, Python bindings (`pip install pylexrs`), and a production-grade HTTP server with horizontal read scaling.
 >
 > ```python
-> # lexpy 1.x
-> from lexpy.trie import Trie
-> from lexpy.dawg import DAWG
->
-> # pylexrs (Rust-backed, same API)
-> from lexrs import Trie, DAWG
+> # drop-in replacement
+> from lexrs import Trie, DAWG  # was: from lexpy.trie / lexpy.dawg
 > ```
 >
-> Full documentation at [aosingh.github.io/lexrs](https://aosingh.github.io/lexrs/).
+> [Documentation](https://aosingh.github.io/lexrs/) · [GitHub](https://github.com/aosingh/lexrs)
 
 ---
 
